@@ -1,0 +1,15 @@
+#back-in-stock-popup-wrapper{
+    background-color: white;
+    width: 400px;
+    padding: 40px;
+    text-align: center;
+}
+
+#back-in-stock-product-name{
+    float: left;
+}
+
+#back-in-stock-product-image{
+    float: right;
+    margin-bottom: 20px;
+}
