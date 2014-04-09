@@ -4,7 +4,7 @@
  * Inspired by the CEON Back In Stock Module. Please continue to keep Conor and his Family in our prayers 
  * 
  */
-//Converts Ceon's table into ours
+//Converts Ceon's table
 function back_in_stock_convert(){
     
 }

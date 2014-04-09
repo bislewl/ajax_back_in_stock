@@ -1,10 +1,45 @@
 <?php
 
 require('includes/application_top.php');
+if($_GET['bis_selected'] != ''){
+$bis_selected = $_GET['bis_selected'];
+}
+else{
+    $bis_selected = 0;
+}
 
+$bis_show = $_GET['filter'];
+$product_id = $_POST['pid'];
+$subscriber = $_POST['sub_email'];
+
+switch($bis_show){
+    case "all":
+        $sql_statement = "SELECT * FROM ".TABLE_BACK_IN_STOCK;
+        $header_comment = "showing all active and non active subscriptions";
+        break;
+    case "product":
+        $sql_statement = "SELECT * FROM ".TABLE_BACK_IN_STOCK." WHERE product_id=".$product_id." AND sub_active = 1";
+        $header_comment = "showing all active subscriptions to ".zen_get_products_name($product_id);
+        break;
+    case "subscriber":
+        $sql_statement = "SELECT * FROM ".TABLE_BACK_IN_STOCK." WHERE email='".$subscriber."' AND sub_active = 1";
+        $header_comment = "showing all active Subscriptions for ".$subscriber;
+        break;
+    default:
+        $sql_statement = "SELECT * FROM ".TABLE_BACK_IN_STOCK." WHERE sub_active = 1";
+        $header_comment = "showing all active subscriptions";
+        break;
+    
+}
+$subscribers = $db->Execute($sql_statement);
+
+
+
+
+$record_count = $subscribers->RecordCount();
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html <?php echo HTML_PARAMS; ?>>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo CHARSET; ?>">
 <title><?php echo TITLE; ?></title>
@@ -36,18 +71,128 @@ require('includes/application_top.php');
 <table border="0" width="100%" cellspacing="2" cellpadding="2">
   <tr>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <td width="75%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo zen_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
+            <td class="pageHeading">Back In Stock Notifications
+                <br/>
+            <?php echo $header_comment;?>
+            </td>
+            <td class="pageHeading" align="right">
+                <?php echo zen_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?>
+                    <?php
+                    echo 'Email:'; 
+                    echo zen_draw_form('back_in_stock', FILENAME_BACK_IN_STOCK, 'filter=subscriber', 'post', '', true);
+                    echo zen_hide_session_id();
+                    echo zen_draw_input_field('sub_email')
+                    ?>
+                    </form><br/>
+                    <?php
+                    echo 'Product ID:'; 
+                    echo zen_draw_form('back_in_stock', FILENAME_BACK_IN_STOCK, 'filter=subscriber', 'post', '', true);
+                    echo zen_hide_session_id();
+                    echo zen_draw_input_field('pid')
+                    ?>
+                    </form><br/>
+                    <?php
+                    if($bis_show != "all"){
+                    echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'filter=all') .'">Show Active & Non-Active</a><br/>';
+                    }
+                    ?>
+                    <?php
+                    if($bis_show != ''){
+                    echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK) .'">Show Active Only</a><br/>';    
+                    }
+                    ?>
+            </td>
           </tr>
         </table></td>
       </tr>
         </table>
     </td>
 <!-- body_text_eof //-->
+  </tr>
+  <tr>
+  <td width="75%" valign="top">
+      <table border="0" width="100%" cellspacing="0" cellpadding="2">
+           <tr class="dataTableHeadingRow">
+                <td class="dataTableHeadingContent" align="left" valign="top">ID</td>
+                <td class="dataTableHeadingContent" align="center" valign="top">Date Subscribed</td>
+                <td class="dataTableHeadingContent" align="center" valign="top">Email</td>
+                <td class="dataTableHeadingContent" align="center" valign="top">Active</td>
+                <td class="dataTableHeadingContent" align="center" valign="top">Product</td>
+           </tr>
+           <?php
+           $rowi = 0;
+           while(!$subscribers->EOF){
+                $rowi++;
+                if($rowi % 2 == 0){ $over = 'Over'; }
+                else{ $over = ''; }
+
+                $rowheader = 'class="dataTableRow'.$over.'"';
+                if($rowi == 1 && $bis_selected == 0){
+                    $rowheader = 'id="defaultSelected" class="dataTableRow'.$over.'Selected"';
+                    $bis_selected = $subscribers->fields['bis_id'];
+                }
+                if($subscribers->fields['bis_id'] == $bis_selected){
+                    $rowheader = 'id="defaultSelected" class="dataTableRow'.$over.'Selected"';
+                }
+           ?>
+           <tr <?php echo $rowheader; ?> onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="document.location.href='<?php echo zen_href_link(FILENAME_BACK_IN_STOCK, 'bis_selected=' . $subscribers->fields['bis_id']);?>'">
+                <td class="dataTableContent" align="left"><?php echo $subscribers->fields['bis_id'];?></td>
+                <td class="dataTableContent" align="center"><?php echo $subscribers->fields['sub_date'];?></td>
+                <td class="dataTableContent" align="center"><?php echo $subscribers->fields['email'];?></td>
+                <td class="dataTableContent" align="center"><?php echo ($subscribers->fields['sub_active'] == 1 ? 'Y' : 'N');?></td>
+                <td class="dataTableContent" align="center"><?php echo zen_get_products_name($subscribers->fields['product_id']);?></td>
+           </tr>
+           <?php
+           $subscribers->MoveNext();
+           }
+           ?>
+              <tr>
+                <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                  <tbody><tr>
+                    <td class="smallText" valign="top">Displaying <?php echo $record_count; ?> Active Notification Subscriptions</td>
+                    <td class="smallText" align="right"></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+            </table>
+  </td>
+  <?php
+  $bis_sub_info = get_back_in_stock_sub_info($bis_selected);
+  ?>
+  <td width="25%" valign="top">
+    <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr class="infoBoxHeading">
+            <td class="infoBoxHeading"><b>ID#<?php echo $bis_selected."  ".$bis_sub_info['email']; ?></b></td>
+        </tr>
+    </table>
+    <table border="0" width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+            <td class="infoBoxContent"><br><b>Subscription Started:</b> <?php echo $bis_sub_info['sub_date']; ?></td>
+        </tr>
+        <tr>
+            <td class="infoBoxContent"><br><b>Subscription Active:</b> <?php echo ($bis_sub_info['sub_active'] == 1 ? 'Y' : 'N'); ?></td>
+        </tr>
+        <tr>
+            <td class="infoBoxContent"><br><b>Product:</b> <?php echo zen_get_products_name($bis_sub_info['product_id']); ?></td>
+        </tr>
+        <tr>
+            <td class="infoBoxContent"><br><b>Canceled When Purchased:</b> <?php echo ($bis_sub_info['active_til_purch'] == 1 ? 'Y' : 'N'); ?></td>
+        </tr>
+        <tr>
+            <td class="infoBoxContent"><br><b>Last Sent:</b> <?php echo $bis_sub_info['last_sent']; ?></td>
+        </tr>
+        <tr>
+            <td class="infoBoxContent"><br><b>Flagged As Spam:</b> <?php echo ($bis_sub_info['spam'] == 1 ? 'Y' : 'N'); ?></td>
+        </tr>
+        <tr>
+            <td class="infoBoxContent"></td>
+        </tr>
+    </table>  
+  </td>
   </tr>
 </table>
 <!-- body_eof //-->

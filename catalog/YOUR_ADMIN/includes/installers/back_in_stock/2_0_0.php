@@ -9,7 +9,7 @@ $db->Execute("CREATE TABLE IF NOT EXISTS " . TABLE_BACK_IN_STOCK . " (
 	`active_til_purch` int(11) NOT NULL DEFAULT '1',
         `sub_active` int(11) NOT NULL DEFAULT '1',
         `spam` int(11) NOT NULL DEFAULT '0',
-	`last_sent` int(11) NOT NULL DEFAULT '0',
+	`last_sent` int(11) NOT NULL default '0',
 	PRIMARY KEY ( `bis_id` ));"
 );
 
@@ -30,7 +30,7 @@ $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, c
 if(version_compare(PROJECT_VERSION_MAJOR.".".PROJECT_VERSION_MINOR, "1.5.0") >= 0) { 
   // continue Zen Cart 1.5.0
   
-  // add to customers menu
+  // add to configuration menus
   if (function_exists('zen_page_key_exists') && function_exists('zen_register_admin_page') && !zen_page_key_exists('configBackInStock')) {
     zen_register_admin_page('configBackInStock',
                             'BOX_BACK_IN_STOCK', 
@@ -42,7 +42,18 @@ if(version_compare(PROJECT_VERSION_MAJOR.".".PROJECT_VERSION_MINOR, "1.5.0") >= 
       
     $messageStack->add('Enabled Back In Stock Configuration menu.', 'success');
   }
-        
+  // add to tools menu
+  if (function_exists('zen_page_key_exists') && function_exists('zen_register_admin_page') && !zen_page_key_exists('toolsBackInStock')) {
+    zen_register_admin_page('toolsBackInStock',
+                            'BOX_BACK_IN_STOCK_TOOLS', 
+                            'FILENAME_BACK_IN_STOCK',
+                            '', 
+                            'tools', 
+                            'Y',
+                            999);
+      
+    $messageStack->add('Enabled Back In Stock Tools menu.', 'success');
+  }      
 }
 
 $messageStack->add('Installed Back In Stock v2.0.0', 'success');
