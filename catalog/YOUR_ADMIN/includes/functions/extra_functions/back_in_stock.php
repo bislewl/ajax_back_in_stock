@@ -12,3 +12,4 @@ function get_back_in_stock_sub_info($bis_id){
     $return['spam'] = $query->fields['spam'];
     return $return;
 }
+include_once DIR_FS_CATALOG.'includes/functions/extra_functions/back_in_stock.php';

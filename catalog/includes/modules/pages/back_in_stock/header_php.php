@@ -1,20 +1,26 @@
 <?php
-
-/* 
- * Copyright (C) 2014 bislewl <bislewl@gmail.com>
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- */
-
+$bis_id = $_GET[bis_id];
+if(is_numeric($bis_id)){
+    switch ($_POST['action']) {
+        case "stop":
+        $modify_subscription = array(
+            'bis_id' => $bis_id,
+            'sub_active' => 0,
+            'spam' => 1
+        );
+        back_in_stock_subscription($modify_subscription, "modify");
+            break;
+        case "delete":
+            back_in_stock_subscription(array('bis_id' => $bis_id),"delete");
+            break;
+        
+    }
+            $bis_id_info = $db->Execute("SELECT * FROM ".TABLE_BACK_IN_STOCK." WHERE bis_id=".$bis_id);
+            if($bis_id_info->RecordCount() > 0){
+                $subcriptions = true;
+            $email_info = $db->Execute("SELECT * FROM ".TABLE_BACK_IN_STOCK." WHERE email LIKE '".$bis_id_info->fields['email']."'");
+            }
+            else{
+                $subcriptions = false;
+            }
+}

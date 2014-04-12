@@ -58,7 +58,7 @@ $emailtosendarr = explode("||", $emailarraysend[$i]);
   $bis['product_id'] = $product_id;
   $returned_results = back_in_stock_subscription($bis, "add");
   if($returned_results === "Subscribed"){
-      echo '<p class="messageStackSuccess"> Error: ' . BACK_IN_STOCK_SUCCESS . '</p>';
+      echo '<p class="messageStackSuccess">' . BACK_IN_STOCK_SUCCESS . '</p>';
   }
   else{
       echo '<p class="messageStackError">' . $returned_results . '</p>';
