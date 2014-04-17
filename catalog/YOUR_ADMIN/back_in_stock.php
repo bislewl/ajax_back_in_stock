@@ -107,6 +107,12 @@ $record_count = $subscribers->RecordCount();
                     ?>
             </td>
           </tr>
+          <tr>
+              <td>
+                  <a href="<?php echo HTTPS_CATALOG_SERVER.DIR_WS_HTTPS_CATALOG."cron/".FILENAME_BACK_IN_STOCK.".php"?>" target="_blank">Manually Run Back In Stock Cron</a> 
+              </td>
+              <td></td>
+          </tr>
         </table></td>
       </tr>
         </table>

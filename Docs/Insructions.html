@@ -1,0 +1,29 @@
+<HTML>
+    <HEAD>
+        <TITLE>Back In Stock</TITLE>
+    </HEAD>
+    <BODY>
+        <h1>Back In Stock Module</h1>
+        <br/>
+        <h2>Instructions</h2>
+        <ol>
+            <li>file: includes/templates/YOUR_TEMPLATE/templates/tpl_product_display
+                <ol>
+                    <li>Add at the top usually after your <code><div class="centerColumn" id="productGeneral"></code> <br/>
+                        <TEXTAREA><!--bof back in stock popup-->
+                        <?php require($template->get_template_dir('tpl_modules_back_in_stock_fancybox.php',DIR_WS_TEMPLATE, $current_page_base,'templates'). '/tpl_modules_back_in_stock_fancybox.php'); ?>
+                        <!--eof back in stock popup--></TEXTAREA>
+                    </li>
+                    <li>Add this where you want the user to click to show the fancy box <br/>
+                        <TEXTAREA>
+                            <?php if(BACK_IN_STOCK_ENABLE == "true"){ ?>
+                            <a href="#back-in-stock-popup-wrapper" id="back-in-stock-popup-link"><?php echo BACK_IN_STOCK_LINK; ?></a>
+                            <?php } ?>
+                            </TEXTAREA>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+        
+    </BODY>
+</HTML>

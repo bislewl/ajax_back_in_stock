@@ -5,6 +5,7 @@ $db->Execute("CREATE TABLE IF NOT EXISTS " . TABLE_BACK_IN_STOCK . " (
 	`product_id` int(11) NOT NULL default '0',
         `variant` int(11) NOT NULL default '0',
 	`sub_date` int(11) NOT NULL default '0',
+        `purch_date` int(11) NOT NULL default '0',
         `name` varchar(96) NOT NULL,
         `email` varchar(96) NOT NULL,
 	`active_til_purch` int(11) NOT NULL DEFAULT '1',
@@ -21,13 +22,13 @@ $db->Execute("UPDATE " . TABLE_CONFIGURATION_GROUP . " SET sort_order = " . $con
 
 $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_VERSION', 'Version Installed', '2.0.0', 'Version of Back In Stock Module');");
 $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description, set_function) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_ENABLE', 'Enabel Module', 'false', 'Should this module be used', 'zen_cfg_select_option(array(\'true\', \'false\'),');");
-$db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_LINK', 'Back In Stock Link', 'Email me when back in stock', 'this is the words that someone would click on.');");
+$db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_LINK', 'Back In Stock Link', 'Email me when back in stock', 'this is the words that someone would click on. HINT - You could also put a <img> tag here too!');");
 $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_POPUP_HEADING', 'Heading for Popup', 'Sorry we ran out!', 'This heading is in the popup');");
 $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_POPUP_SUBHEADING', 'Sub Heading for Popup', 'Fill out this for and we will let you know when it comes back in stock', 'This Sub heading is in the popup');");
 $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_SEND_TEXT', 'Text of buton', 'Notify Me!', 'This is the text on the button');");
 $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description, set_function) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_SHOW_PRODUCT_INFO', 'Show Product Name and Image', 'true', 'Show product name and image on the fancy box on the product_info page', 'zen_cfg_select_option(array(\'true\', \'false\'),');");
 $db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description, set_function) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_ACTIVE_TIL_PURCH', 'Notifications are Active Til They Purchase', 'false', 'This is useful if you want to sen your customers multipul reminders, until they Buy or Die', 'zen_cfg_select_option(array(\'true\', \'false\'),');");
-$db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_DAYS_WAITING', 'Days of Lag', '5', 'This is the number of days until you should send them again, this is an almost must if leaving Active Till Purch Active');");
+$db->Execute("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_group_id, configuration_key, configuration_title, configuration_value, configuration_description) VALUES (" . (int)$configuration_group_id . ", 'BACK_IN_STOCK_DAYS_WAITING', 'Days of Lag', '5', 'This is the number of days until you should send them again, this is an almost must if leaving Active Till Purch Active, you can also set zero to be notified everytime the cron is run but this will more then likely make you customer want to unsubscribre');");
 
 if(version_compare(PROJECT_VERSION_MAJOR.".".PROJECT_VERSION_MINOR, "1.5.0") >= 0) { 
   // continue Zen Cart 1.5.0
@@ -58,4 +59,3 @@ if(version_compare(PROJECT_VERSION_MAJOR.".".PROJECT_VERSION_MINOR, "1.5.0") >= 
   }      
 }
 
-$messageStack->add('Installed Back In Stock v2.0.0', 'success');
