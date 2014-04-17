@@ -22,7 +22,31 @@ function aasort (&$array, $key) {
 
 //Converts Ceon's table
 function back_in_stock_convert(){
-    
+    global $db;
+    $table_exists_query = 'SHOW TABLES LIKE "' .
+			TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS . '";';
+    $table_exists_result = $db->Execute($table_exists_query);
+    if (!$table_exists_result->EOF) {
+        $ceons_subscribers = $db-Execute("SELECT * FROM ".TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS);
+        while(!$ceons_subscribers->EOF){
+            $array = array();
+            $array['product_id'] = $ceons_subscribers->fields['product_id'];
+            $array['sub_date'] = $ceons_subscribers->fields['date_subscribed'];
+            $array['sub_active'] = 1;
+            if($ceons_subscribers->fields['customer_id'] != ''){
+               $customer_info = $db->Execute("SELECT customers_email_address, customers_lastname, customers_firstname FROM ".TABLE_CUSTOMERS." WHERE customers_id=".$ceons_subscribers->fields['customer_id']); 
+               $array['name'] = $customer_info->fields['customers_firstname']." ".$customer_info->fields['customers_lastname'];
+               $array['email'] = $customer_info->fields['customers_email_address'];
+            }
+            else{
+                $array['name'] = $ceons_subscribers->fields['name'];
+                $array['email'] = $ceons_subscribers->fields['email_address'];
+            }
+            back_in_stock_subscription($array);
+            $ceons_subscribers->MoveNext();
+        }
+    }
+    $db->Execute("DROP TABLE ".TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS);
 }
 
 function back_in_stock_status ($email, $product = 0){

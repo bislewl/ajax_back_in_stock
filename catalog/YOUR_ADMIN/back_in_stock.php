@@ -8,6 +8,24 @@ else{
     $bis_selected = 0;
 }
 
+$convert_get = $_GET['convert'];
+if($convert_get == true){
+    $conversion_offered = ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'confirm_convert=true') .'">Confirm Converison from CEON Back In Stock?</a><br/>';
+}
+$confirm_convert_get = $_GET['confirm_convert'];
+if($confirm_convert_get == true){
+    $conversion_offered = "Conversion Complete";
+}
+$table_exists_query = 'SHOW TABLES LIKE "' .
+			TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS . '";';
+    $table_exists_result = $db->Execute($table_exists_query);
+if (!$table_exists_result->EOF) {
+        $ceon_bis_table_present = true; 
+  }
+if($confirm_convert_get != true && $convert_get != true && $ceon_bis_table_present == true){
+    $conversion_offered = ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'convert=true') .'">Convert from CEON Back In Stock?</a><br/>';
+}    
+
 $bis_show = $_GET['filter'];
 $product_id = $_POST['pid'];
 $subscriber = $_POST['sub_email'];
@@ -111,7 +129,7 @@ $record_count = $subscribers->RecordCount();
               <td>
                   <a href="<?php echo HTTPS_CATALOG_SERVER.DIR_WS_HTTPS_CATALOG."cron/".FILENAME_BACK_IN_STOCK.".php"?>" target="_blank">Manually Run Back In Stock Cron</a> 
               </td>
-              <td></td>
+              <td>$conversion_offered</td>
           </tr>
         </table></td>
       </tr>
