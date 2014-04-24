@@ -22,5 +22,14 @@ if(is_numeric($bis_id)){
             }
             else{
                 $subcriptions = false;
+                
+            }
+}
+else if($_SESSION['customer_id']){
+            $email = $db->Execute("SELECT customers_email_address FROM ".TABLE_CUSTOMERS." WHERE customers_id=".$_SESSION['customer_id']);
+            
+            $email_info = $db->Execute("SELECT * FROM ".TABLE_BACK_IN_STOCK." WHERE email LIKE '".$email->fields['customers_email_address']."'");
+            if($email_info->RecordCount() > 0){
+            $subcriptions = true;
             }
 }

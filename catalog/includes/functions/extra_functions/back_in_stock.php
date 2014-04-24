@@ -1,7 +1,8 @@
 <?php
 /*
  * Back in Stock Notification
- * Inspired by the CEON Back In Stock Module. Please continue to keep Conor and his Family in our prayers 
+ * Forked / Inspired by the CEON Back In Stock Module. 
+ * Please continue to keep Conor and his Family in our prayers 
  * 
  */
 //sort multi-deminsional array
@@ -147,9 +148,15 @@ function back_in_stock_send ($products_id = 0,$bis_id = 0){
         }
         $bis_products->MoveNext();
     }
+    $counted = 0;
     foreach ($bis_emails as $emails) {
+        $counted++;
+        if($counted == (int)BACK_IN_STOCK_MAX_EMAILS_PER_BATCH){
+            break;
+        }
         $customers_name = $emails['name'];
         $customers_email = $emails['email'];
+        $html_message = array();
         $html_message['CUSTOMERS_NAME'] = $customers_name;
         $html_message['PRODUCT_NAME'] = zen_get_products_name($emails['product_id']);
         $html_message['SPAM_LINK'] = HTTPS_SERVER.DIR_WS_HTTPS_CATALOG.'index.php?main_page=back_in_stock&bis_id='.$emails['bis_id'];
@@ -166,6 +173,9 @@ function back_in_stock_send ($products_id = 0,$bis_id = 0){
                         .$html_message['BOTTOM_MESSAGE']."\n"."\n"
                         .'To unsubscribe click here '.$html_message['SPAM_LINK']."\n";
         zen_mail($customers_name, $customers_email,$html_message['PRODUCT_NAME'].' is Back In Stock at '.STORE_NAME,$email_text,STORE_NAME, EMAIL_FROM,$html_message,'back_in_stock_notification');
+        if(BACK_IN_STOCK_SEND_ADMIN_EMAIL == true){
+        zen_mail('', BACK_IN_STOCK_ADMIN_EMAIL,$html_message['PRODUCT_NAME'].' is Back In Stock at '.STORE_NAME,$email_text,STORE_NAME, EMAIL_FROM,$html_message,'back_in_stock_notification');
+        }
         echo "Sent Email to: ".$customers_email."\n";
         $modify_subscription = array(
             'bis_id' => $emails['bis_id'],
