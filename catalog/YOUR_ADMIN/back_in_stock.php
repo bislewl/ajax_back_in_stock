@@ -1,4 +1,8 @@
 <?php
+if (!defined('IS_ADMIN_FLAG'))
+{
+	die('Illegal Access');
+}
 
 require('includes/application_top.php');
 if($_GET['bis_selected'] != ''){
