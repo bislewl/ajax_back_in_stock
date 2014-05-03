@@ -1,10 +1,8 @@
 <?php
-if (!defined('IS_ADMIN_FLAG'))
-{
-	die('Illegal Access');
-}
-
 require('includes/application_top.php');
+require(DIR_WS_CLASSES . 'currencies.php');
+  $currencies = new currencies();
+  
 if($_GET['bis_selected'] != ''){
 $bis_selected = $_GET['bis_selected'];
 }
@@ -131,9 +129,11 @@ $record_count = $subscribers->RecordCount();
           </tr>
           <tr>
               <td>
-                 <form name="back_in_stock" action="<?php echo HTTPS_CATALOG_SERVER.DIR_WS_HTTPS_CATALOG."cron/".FILENAME_BACK_IN_STOCK.".php";?>" target="_blank" method="get">
-                  Product (leave 0 for all): <input type="text" name="products_id">
-                  <input type="hidden" name="key" value="<?php echo BACK_IN_STOCK_CRON_KEY;?>"
+                 <form name="back_in_stock" action="<?php echo HTTPS_CATALOG_SERVER.DIR_WS_HTTPS_CATALOG."cron/send_back_in_stock_notifications.php";?>" target="_blank" method="get">
+                  Product: <?php echo zen_draw_products_pull_down('product_id','> <option value="0">All Products</option'); ?>
+                  <?php echo zen_draw_hidden_field('key',BACK_IN_STOCK_CRON_KEY)?>
+                  <?php echo zen_draw_hidden_field('bis_id','0')?>
+                  <?php echo 'Preview: '.zen_draw_checkbox_field('preview','true',true) ?>
                   <input type="submit" value="Run Notifications">
                  </form>
               </td>
@@ -230,7 +230,7 @@ $record_count = $subscribers->RecordCount();
   </tr>
 </table>
 <!-- body_eof //-->
-File to add to your cron in cpanel: <?php echo "'".HTTPS_CATALOG_SERVER.DIR_WS_HTTPS_CATALOG."cron/".FILENAME_BACK_IN_STOCK.".php?key=".BACK_IN_STOCK_CRON_KEY."' ";?>
+File to add to your cron in cpanel: <?php echo "'".HTTPS_CATALOG_SERVER.DIR_WS_HTTPS_CATALOG."cron/send_back_in_stock_notifications.php?key=".BACK_IN_STOCK_CRON_KEY."' ";?>
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->

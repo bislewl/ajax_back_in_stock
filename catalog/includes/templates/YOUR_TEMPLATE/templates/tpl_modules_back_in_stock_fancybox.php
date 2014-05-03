@@ -48,8 +48,17 @@
 		<div id="contact_messages">
 		</div>
 		<div class="back-in-stock-popup-wrapper-button-row">
+                    <?php 
+                    if(BACK_IN_STOCK_POPUP_NOTIFY_IMG == '') {
+                    ?>
 			<button type="submit" value="<?php echo BACK_IN_STOCK_SEND_TEXT; ?>"><?php echo BACK_IN_STOCK_SEND_TEXT; ?></button>
-			<div class="clearBoth"></div>
+			<?php
+                    }
+                    else{
+                        echo zen_image_submit(BACK_IN_STOCK_POPUP_NOTIFY_IMG);
+                    }
+                        ?>
+                        <div class="clearBoth"></div>
 		</div>
 		<div class="clearBoth"></div>
 		</form>

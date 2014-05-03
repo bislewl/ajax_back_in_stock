@@ -33,24 +33,28 @@ a:visited {color:#0066cc;}
   </div>
 
 </div>
-    <div class="content" style="text-align:left;">
+    <div class="clearBoth"></div>
+    <div class="content" style="width:100%;">
         Dear $CUSTOMERS_NAME,<br/>
-        <br/>
+        <div class="clearBoth"></div>
         $TOP_MESSAGE
-        <br/>
-        <div>
-            <div style="float:left;">
-                <a href="$PRODUCT_LINK"><b>$PRODUCT_NAME</b></a><br/>
+        <div class="clearBoth"></div>
+        <table>
+            <tr>
+                <td><a href="$PRODUCT_LINK"><b>$PRODUCT_NAME</b></a><br/>
                 $PRODUCT_DESCRIPTION
-            </div>
-            <div style="float:right;">
-                <a href="$PRODUCT_LINK"><img src="$PRODUCT_IMAGE"></a>
-            </div>
-        </div><br/>
-        <div class="content">
-            $BOTTOM_MESSAGE
-        </div>
+                </td>
+                <td>
+                   <a href="$PRODUCT_LINK">$PRODUCT_IMAGE</a> 
+                </td>
+            </tr>
+        </table>
     </div>
+    <div class="extra-info">
+            $BOTTOM_MESSAGE
+    </div>
+    <br/>
+    <br/>
     <div class="disclaimer">
         We would be sorry to see you go but use the following link to remove your self from receiving this again.<br/>
         <a href="$SPAM_LINK">$SPAM_LINK</a>
