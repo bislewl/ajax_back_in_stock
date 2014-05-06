@@ -160,7 +160,7 @@ function back_in_stock_send ($product_id = 0,$bis_id = 0, $preview = true){
         $customers_email = $emails['email'];
         $html_message = array();
         $html_message['CUSTOMERS_NAME'] = $customers_name;
-        $html_message['PRODUCT_NAME'] = zen_get_products_name($emails['product_id']);
+        $html_message['PRODUCT_NAME'] = strip_tags(zen_get_products_name($emails['product_id']));
         $html_message['SPAM_LINK'] = HTTPS_SERVER.DIR_WS_HTTPS_CATALOG.'index.php?main_page=back_in_stock&bis_id='.$emails['bis_id'];
         $html_message['TOP_MESSAGE'] = 'Thank You for your interest in the '.$html_message['PRODUCT_NAME'];
         $html_message['PRODUCT_DESCRIPTION'] = zen_get_products_description($emails['product_id']);
