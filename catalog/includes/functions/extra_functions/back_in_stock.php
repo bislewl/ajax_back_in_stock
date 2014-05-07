@@ -77,7 +77,38 @@ function back_in_stock_subscription($array, $change_type = "add"){
             }
             $db->Execute("INSERT INTO ".TABLE_BACK_IN_STOCK." (email, product_id, sub_date, sub_active, name, active_til_purch) VALUES
                      ('".$email."', ".$product_id.", NOW(), 1, '".$name."', ".BACK_IN_STOCK_ACTIVE_TIL_PURCH." )");
+            $bis_id = $db->Insert_ID();
             $result = "Subscribed";
+            //send email
+            if(BACK_IN_STOCK_EMAIL_SUBSCRIBE){
+                $customers_name = $name;
+                $customers_email = $email;
+                $html_message = array();
+                $html_message['CUSTOMERS_NAME'] = $customers_name;
+                $html_message['PRODUCT_NAME'] = strip_tags(zen_get_products_name($product_id));
+                $html_message['SPAM_LINK'] = HTTPS_SERVER.DIR_WS_HTTPS_CATALOG.'index.php?main_page=back_in_stock&bis_id='.$bis_id;
+                $html_message['TOP_MESSAGE'] = 'Thank You for your interest in the '.$html_message['PRODUCT_NAME'];
+                if(BACK_IN_STOCK_DESC_IN_EMAIL == 1){
+                $html_message['PRODUCT_DESCRIPTION'] = zen_get_products_description($product_id);
+                }
+                else{
+                    $html_message['PRODUCT_DESCRIPTION'] = " ";
+                }
+                $html_message['PRODUCT_IMAGE'] = zen_get_products_image($product_id, LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
+                $html_message['PRODUCT_LINK'] = zen_href_link('product_info','products_id='.$product_id);
+                $html_message['BOTTOM_MESSAGE'] = 'Please reply to this email with any questions';
+                $email_text = 'Dear '.$customers_name.','. "\n"
+                                .$html_message['TOP_MESSAGE']."\n"."\n"
+                                .$html_message['PRODUCT_NAME']."\n"
+                                .$html_message['PRODUCT_DESCRIPTION']."\n"
+                                .$html_message['PRODUCT_LINK']."\n"."\n"
+                                .$html_message['BOTTOM_MESSAGE']."\n"."\n"
+                                .'To unsubscribe click here '.$html_message['SPAM_LINK']."\n";
+                zen_mail($customers_name, $customers_email,$html_message['PRODUCT_NAME'].' Subscription is active '.STORE_NAME,$email_text,STORE_NAME, EMAIL_FROM,$html_message,'back_in_stock_notification');
+                if(BACK_IN_STOCK_SEND_ADMIN_EMAIL == true){
+                zen_mail('', BACK_IN_STOCK_ADMIN_EMAIL,$html_message['PRODUCT_NAME'].' Subscription is active '.STORE_NAME,$email_text,STORE_NAME, EMAIL_FROM,$html_message,'back_in_stock_notification');
+                }
+            }
             break;
         case "modify":
             if($array['bis_id'] == ''){
@@ -88,13 +119,13 @@ function back_in_stock_subscription($array, $change_type = "add"){
             foreach ($array as $key => $value) {
                 if($key != "bis_id"){
                     $i++;
-                    if($i >= 2){
-                        $update .= ',';
+                    if($i > 1){
+                        $update .= ", ";
                     }
-                    $update .= " ".$key."=".$value;
+                    $update .= " ".$key."=".(int)$value;
                 }
                 else{
-                    $where = " WHERE bis_id=".$value;
+                    $where = " WHERE bis_id=".(int)$value;
                 }
             }
             $db->Execute("UPDATE ".TABLE_BACK_IN_STOCK." SET ".$update.$where);
@@ -121,7 +152,7 @@ function back_in_stock_send ($product_id = 0,$bis_id = 0, $preview = true){
     }
     // Find all Items in notifications
     $bis_emails[] = array();
-    $bis_products = $db->Execute("SELECT DISTINCT product_id FROM ".TABLE_BACK_IN_STOCK." WHERE sub_active=1".$addtl_where);
+    $bis_products = $db->Execute("SELECT DISTINCT product_id FROM ".TABLE_BACK_IN_STOCK." WHERE sub_active=1 ".$addtl_where);
     while(!$bis_products->EOF){
         if(zen_get_products_stock($bis_products->fields['product_id']) == 0){
             $bis_products->MoveNext();
@@ -163,8 +194,13 @@ function back_in_stock_send ($product_id = 0,$bis_id = 0, $preview = true){
         $html_message['PRODUCT_NAME'] = strip_tags(zen_get_products_name($emails['product_id']));
         $html_message['SPAM_LINK'] = HTTPS_SERVER.DIR_WS_HTTPS_CATALOG.'index.php?main_page=back_in_stock&bis_id='.$emails['bis_id'];
         $html_message['TOP_MESSAGE'] = 'Thank You for your interest in the '.$html_message['PRODUCT_NAME'];
+        if(BACK_IN_STOCK_DESC_IN_EMAIL == 1){
         $html_message['PRODUCT_DESCRIPTION'] = zen_get_products_description($emails['product_id']);
-        $html_message['PRODUCT_IMAGE'] = zen_get_products_image($emails['product_id']);
+        }
+        else{
+            $html_message['PRODUCT_DESCRIPTION'] = " ";
+        }
+        $html_message['PRODUCT_IMAGE'] = zen_get_products_image($emails['product_id'], LARGE_IMAGE_WIDTH, LARGE_IMAGE_HEIGHT);
         $html_message['PRODUCT_LINK'] = zen_href_link('product_info','products_id='.$emails['product_id']);
         $html_message['BOTTOM_MESSAGE'] = 'Please reply to this email with any questions';
         $email_text = 'Dear '.$customers_name.','. "\n"

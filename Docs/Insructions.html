@@ -9,7 +9,7 @@
         <ol>
             <li>file: includes/templates/YOUR_TEMPLATE/templates/tpl_product_display
                 <ol>
-                    <li>Add at the top usually after your <code><div class="centerColumn" id="productGeneral"></code> <br/>
+                    <li>Add at the top usually after your <TEXTAREA><div class="centerColumn" id="productGeneral"></TEXTAREA> <br/>
                         <TEXTAREA><!--bof back in stock popup-->
                         <?php require($template->get_template_dir('tpl_modules_back_in_stock_fancybox.php',DIR_WS_TEMPLATE, $current_page_base,'templates'). '/tpl_modules_back_in_stock_fancybox.php'); ?>
                         <!--eof back in stock popup--></TEXTAREA>
@@ -20,6 +20,11 @@
                             <a href="#back-in-stock-popup-wrapper" id="back-in-stock-popup-link"><?php echo BACK_IN_STOCK_LINK; ?></a>
                             <?php } ?>
                             </TEXTAREA>
+                    </li>
+                    <li>Add this where you want a link to the change the subscriptions
+                        <TEXTAREA>
+                            <li><?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, '', 'SSL') . '">' . BACK_IN_STOCK_MY_ACCOUNT_LINK . '</a>'; ?></li>
+                        </TEXTAREA>
                     </li>
                 </ol>
             </li>
