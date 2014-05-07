@@ -17,7 +17,7 @@
             <?php if(BACK_IN_STOCK_SHOW_PRODUCT_INFO == "true"){ ?>
                 <div id="back-in-stock-product">
                     <div id="back-in-stock-product-name">
-                        <h2>
+                        <h2 id="productName">
                        <?php 
                        echo zen_get_products_name($_GET[products_id]);
                        ?>

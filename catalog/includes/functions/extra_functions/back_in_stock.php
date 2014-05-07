@@ -87,7 +87,7 @@ function back_in_stock_subscription($array, $change_type = "add"){
                 $html_message['CUSTOMERS_NAME'] = $customers_name;
                 $html_message['PRODUCT_NAME'] = strip_tags(zen_get_products_name($product_id));
                 $html_message['SPAM_LINK'] = HTTPS_SERVER.DIR_WS_HTTPS_CATALOG.'index.php?main_page=back_in_stock&bis_id='.$bis_id;
-                $html_message['TOP_MESSAGE'] = 'Thank You for your interest in the '.$html_message['PRODUCT_NAME'];
+                $html_message['TOP_MESSAGE'] = 'Thank You for your interest in the '.$html_message['PRODUCT_NAME'].'. It has been added to your Wish List and you will be notified when it is available for purchase!';
                 if(BACK_IN_STOCK_DESC_IN_EMAIL == 1){
                 $html_message['PRODUCT_DESCRIPTION'] = zen_get_products_description($product_id);
                 }
@@ -193,7 +193,7 @@ function back_in_stock_send ($product_id = 0,$bis_id = 0, $preview = true){
         $html_message['CUSTOMERS_NAME'] = $customers_name;
         $html_message['PRODUCT_NAME'] = strip_tags(zen_get_products_name($emails['product_id']));
         $html_message['SPAM_LINK'] = HTTPS_SERVER.DIR_WS_HTTPS_CATALOG.'index.php?main_page=back_in_stock&bis_id='.$emails['bis_id'];
-        $html_message['TOP_MESSAGE'] = 'Thank You for your interest in the '.$html_message['PRODUCT_NAME'];
+        $html_message['TOP_MESSAGE'] = 'Thank You for your interest in the '.$html_message['PRODUCT_NAME'].'It is now available for purchase!';
         if(BACK_IN_STOCK_DESC_IN_EMAIL == 1){
         $html_message['PRODUCT_DESCRIPTION'] = zen_get_products_description($emails['product_id']);
         }

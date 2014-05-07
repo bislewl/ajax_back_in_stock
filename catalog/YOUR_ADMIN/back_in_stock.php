@@ -51,9 +51,15 @@ switch($bis_show){
         break;
     
 }
-$subscribers = $db->Execute($sql_statement);
 
-
+$sort = $_GET['sort'];
+if($sort != ''){
+    $order_by = " ORDER BY ".$sort." ASC";
+}
+else{
+    $order_by = " ";
+}
+$subscribers = $db->Execute($sql_statement.$order_by);
 
 
 $record_count = $subscribers->RecordCount();
@@ -152,10 +158,13 @@ $record_count = $subscribers->RecordCount();
       <table border="0" width="100%" cellspacing="0" cellpadding="2">
            <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent" align="left" valign="top">ID</td>
-                <td class="dataTableHeadingContent" align="center" valign="top">Date Subscribed</td>
-                <td class="dataTableHeadingContent" align="center" valign="top">Email</td>
+                <td class="dataTableHeadingContent" align="center" valign="top">
+                    <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK,'sort=sub_date') .'">Date Subscribed</a><br/>';?></td>
+                <td class="dataTableHeadingContent" align="center" valign="top">
+                    <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK,'sort=email') .'">Email</a><br/>';?></td>
                 <td class="dataTableHeadingContent" align="center" valign="top">Active</td>
-                <td class="dataTableHeadingContent" align="center" valign="top">Product</td>
+                <td class="dataTableHeadingContent" align="center" valign="top">
+                    <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK,'sort=product_id') .'">Product</a><br/>';?></td>
            </tr>
            <?php
            $rowi = 0;

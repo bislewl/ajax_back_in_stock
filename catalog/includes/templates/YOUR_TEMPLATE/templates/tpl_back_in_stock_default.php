@@ -13,11 +13,13 @@
             <table>
                 <th style="text-align: center;">Unsubscribe</th>
                 <th style="text-align: left;">Products</th>
+                <th style="text-align: left;">Date Subscribed</th>
             <?php
         while(!$email_info->EOF){
              echo '<tr>';
              echo '<td style="text-align: center;">'.zen_draw_checkbox_field('bis_id[]',$email_info->fields['bis_id']).'</td>';
              echo '<td style="text-align: left;">'.strip_tags(zen_get_products_name($email_info->fields['product_id'])).'</td>';
+             echo '<td style="text-align: left;">'.$email_info->fields['sub_date'].'</td>';
              echo '</tr>';
             $email_info->MoveNext();
         }
