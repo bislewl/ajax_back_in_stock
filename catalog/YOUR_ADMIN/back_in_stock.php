@@ -16,6 +16,7 @@ if($convert_get == true){
 }
 $confirm_convert_get = $_GET['confirm_convert'];
 if($confirm_convert_get == true){
+    back_in_stock_convert();
     $conversion_offered = "Conversion Complete";
 }
 $table_exists_query = 'SHOW TABLES LIKE "' .

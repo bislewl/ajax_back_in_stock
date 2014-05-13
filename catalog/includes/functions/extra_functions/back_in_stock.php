@@ -28,7 +28,7 @@ function back_in_stock_convert(){
 			TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS . '";';
     $table_exists_result = $db->Execute($table_exists_query);
     if (!$table_exists_result->EOF) {
-        $ceons_subscribers = $db-Execute("SELECT * FROM ".TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS);
+        $ceons_subscribers = $db->Execute("SELECT * FROM ".TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS);
         while(!$ceons_subscribers->EOF){
             $array = array();
             $array['product_id'] = $ceons_subscribers->fields['product_id'];
@@ -43,7 +43,7 @@ function back_in_stock_convert(){
                 $array['name'] = $ceons_subscribers->fields['name'];
                 $array['email'] = $ceons_subscribers->fields['email_address'];
             }
-            back_in_stock_subscription($array);
+            back_in_stock_subscription($array,"bulk");
             $ceons_subscribers->MoveNext();
         }
     }
@@ -70,6 +70,7 @@ function back_in_stock_subscription($array, $change_type = "add"){
     $product_id = $array['product_id'];
     $current_status = back_in_stock_status($email, $product_id);
     switch ($change_type){
+        case "bulk":
         case "add":
             if($current_status == 1){
                 $result = BACK_IN_STOCK_ALREADY_SUB;
@@ -80,7 +81,7 @@ function back_in_stock_subscription($array, $change_type = "add"){
             $bis_id = $db->Insert_ID();
             $result = "Subscribed";
             //send email
-            if(BACK_IN_STOCK_EMAIL_SUBSCRIBE){
+            if(BACK_IN_STOCK_EMAIL_SUBSCRIBE && $change_type != "bulk"){
                 $customers_name = $name;
                 $customers_email = $email;
                 $html_message = array();

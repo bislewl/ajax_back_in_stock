@@ -3,17 +3,18 @@
     <?php
     if($subcriptions){
     ?>
+    To unsubscribe from a list simply check the box beside the appropriate product and click unsubscribe.
     <div class="currentNotificationsHead">
-        <b><?php echo $email_info->fields['email']?></b><br/><br/>
+        <b>Current Subscriptions for: <?php echo $email_info->fields['email']?></b>
         <div class="currentNotifications">
             <?php 
             echo zen_draw_form('back_in_stock', zen_href_link(FILENAME_BACK_IN_STOCK, '', ($_SERVER['HTTPS'] == 'on' ? 'SSL' : 'NONSSL')));
             echo zen_draw_hidden_field('action',"stop");
             ?>
             <table>
-                <th style="text-align: center;">Unsubscribe</th>
-                <th style="text-align: left;">Products</th>
-                <th style="text-align: left;">Date Subscribed</th>
+                <th style="text-align: center;width: 20%;">Unsubscribe</th>
+                <th style="text-align: left; width: 50%;">Product</th>
+                <th style="text-align: left; width: 30%;">Date Subscribed</th>
             <?php
         while(!$email_info->EOF){
              echo '<tr>';
@@ -26,6 +27,7 @@
         ?>
         </table>
             <button type="submit" value="unsubscribe" style="float:left;">Unsubscribe</button>
+            <br/>
             </form> 
             <?php
     }
