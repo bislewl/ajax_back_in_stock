@@ -1,0 +1,1 @@
+The installation instructions are located in doc/readme.html

@@ -1,0 +1,89 @@
+/* 
+    Created on : Sep 11, 2014, 10:43:05 AM
+    Author     : bislewl <bislewl@gmail.com>
+*/
+
+body{
+    width:100%;
+
+}
+#header{
+    width: 100%;
+    background-color: grey;
+}
+#disclaimer{
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+}
+#logo{
+    float:left;
+}
+#moduleName{
+    float: left;
+    margin-top: 50px;
+    margin-left: 200px;
+    font-size: 60px;
+    text-align: center;
+}
+
+
+.etabs { margin: 0; padding: 0; }
+.tab { display: inline-block; zoom:1; *display:inline; background: #eee; border: solid 1px #999; border-bottom: none; -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; }
+.tab a { font-size: 14px; line-height: 2em; display: block; padding: 0 10px; outline: none; }
+.tab a:hover { text-decoration: underline; }
+.tab.active { background: #fff; padding-top: 6px; position: relative; top: 1px; border-color: #666; }
+.tab a.active { font-weight: bold; }
+.tab-container .panel-container { background: grey; width:100%; border: solid #666 1px; padding: 10px; -moz-border-radius: 0 4px 4px 4px; -webkit-border-radius: 0 4px 4px 4px; }
+
+
+[id^='tabs-'] {
+    white-space: pre-wrap;
+    background: white;
+    margin-top: -30px;
+    border: 1px solid #000000;
+}
+
+#tabs-install{
+    font-weight: bold;
+}
+#readme{
+    width: 850px;
+    margin-left: 200px;
+    background: #D4E0E7;
+}
+
+#tab-container{
+    margin-left: 45px;
+    margin-right: 45px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+textarea{
+    width: 600px;
+    height: 100px;
+}
+#top-info{
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+}
+.etabs{
+    margin-bottom: 30px;
+}
+#copyright{
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+#copyright a{
+    text-decoration: none;
+}
+#tabs-license{
+    padding-left: 18px;
+    padding-right: 18px;
+}
