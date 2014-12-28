@@ -1,1 +1,1 @@
-The installation instructions are located in doc/readme.html
+The installation instructions are located in docs/readme.html
