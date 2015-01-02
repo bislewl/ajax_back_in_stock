@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @copyright Copyright 2010-2014  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
  * @copyright Copyright 2003-2014 Zen Cart Development Team
@@ -38,6 +37,3 @@ class bisAfterPurchase extends base {
     }
 
 }
-
-// eof
-

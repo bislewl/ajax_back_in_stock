@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @copyright Copyright 2010-2014  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
  * @copyright Copyright 2003-2014 Zen Cart Development Team
@@ -10,28 +9,21 @@ require('../includes/configure.php');
 ini_set('include_path', DIR_FS_CATALOG . PATH_SEPARATOR . ini_get('include_path'));
 chdir(DIR_FS_CATALOG);
 require_once('includes/application_top.php');
-//
-// This should be first line of the script:
+//let's add this in case someone someday wants to add an observer.
 $zco_notifier->notify('NOTIFY_HEADER_START_SUBSCRIBE_BACK_IN_STOCK');
 
-// simulate the contact us page
-$_GET['main_page'] = $current_page_base = 'back_in_stock';
 $language_page_directory = DIR_WS_LANGUAGES . $_SESSION['language'] . '/';
 require(DIR_WS_MODULES . zen_get_module_directory('require_languages.php'));
 
 $error = false;
-$name = zen_db_prepare_input($_POST['contactname']);
+$name = zen_db_prepare_input($_POST['customer_name']);
 $email_address = zen_db_prepare_input($_POST['email']);
-$enquiry = zen_db_prepare_input(strip_tags($_POST['enquiry']));
-$antiSpam = isset($_POST['should_be_empty']) ? zen_db_prepare_input($_POST['should_be_empty']) : '';
-
+$empty = isset($_POST['should_be_empty']) ? zen_db_prepare_input($_POST['should_be_empty']) : '';
 $product_id = zen_db_prepare_input($_POST['product_id']);
-
+//Validate the email address
 $zc_validate_email = zen_validate_email($email_address);
 
-if ($zc_validate_email && $antiSpam == '' && $product_id != '') {
-
-
+if ($zc_validate_email && $empty == '' && $product_id != '') {
     $bis['email'] = $email_address;
     $bis['name'] = $name;
     $bis['product_id'] = $product_id;
@@ -54,9 +46,7 @@ if ($zc_validate_email && $antiSpam == '' && $product_id != '') {
     }
     echo '<p class="messageStackError">' . $returned_results . '</p>';
 }
-
-// This should be the last line of the script:
+//let's add this in case someone someday wants to add an observer.
 $zco_notifier->notify('NOTIFY_HEADER_END_SUBSCRIBE_BACK_IN_STOCK');
-//
+//end of the file
 require_once('includes/application_bottom.php');
-?>

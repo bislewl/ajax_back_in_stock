@@ -17,7 +17,6 @@ if ($_SESSION['customer_id']) {
     $customer_name = $check_customer->fields['customers_firstname'] . ' ' . $check_customer->fields['customers_lastname'];
 }
 ?>
-
 <div style="display: none;">
     <div id="back-in-stock-popup-wrapper">
         <?php if (BACK_IN_STOCK_SHOW_PRODUCT_INFO == "true") { ?>
@@ -44,12 +43,12 @@ if ($_SESSION['customer_id']) {
         </div>
         <?php echo zen_draw_form('back_in_stock', zen_href_link(FILENAME_BACK_IN_STOCK, 'action=send', ($_SERVER['HTTPS'] == 'on' ? 'SSL' : 'NONSSL'))); ?>
         <div class="back-in-stock-popup-content-wrapper">
-            <?php echo zen_draw_input_field('contactname', ($customer_name), ' size="40" id="contactname" placeholder="' . BACK_IN_STOCK_NAME . '"'); ?>
+            <?php echo zen_draw_input_field('customer_name', ($customer_name), ' size="40" id="customer_name" placeholder="' . BACK_IN_STOCK_NAME . '"'); ?>
             <div class="clearBoth"></div>
             <?php echo zen_draw_input_field('email', ($customer_email), ' size="40" id="email-address" placeholder="' . BACK_IN_STOCK_EMAIL . '"'); ?>
         </div>
         <?php echo zen_draw_hidden_field('product_id', $_GET[products_id]); ?>
-        <?php echo zen_draw_input_field('should_be_empty', '', ' size="40" id="CUAS" style="visibility:hidden; display:none;" autocomplete="off"'); ?>
+        <?php echo zen_draw_input_field('should_be_empty', '', ' size="40" style="visibility:hidden; display:none;" autocomplete="off"'); ?>
         <div class="clearBoth"></div>
         <div id="contact_messages">
         </div>
