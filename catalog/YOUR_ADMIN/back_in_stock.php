@@ -10,16 +10,16 @@ require(DIR_WS_CLASSES . 'currencies.php');
 $currencies = new currencies();
 
 if ($_GET['bis_selected'] != '') {
-    $bis_selected = $_GET['bis_selected'];
+    $bis_selected = zen_db_prepare_input($_GET['bis_selected']);
 } else {
     $bis_selected = 0;
 }
 
-$convert_get = $_GET['convert'];
+$convert_get = zen_db_prepare_input($_GET['convert']);
 if ($convert_get == true) {
     $conversion_offered = ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'confirm_convert=true') . '">Confirm Converison from CEON Back In Stock?</a><br/>';
 }
-$confirm_convert_get = $_GET['confirm_convert'];
+$confirm_convert_get = zen_db_prepare_input($_GET['confirm_convert']);
 if ($confirm_convert_get == true) {
     back_in_stock_convert();
     $conversion_offered = "Conversion Complete";
@@ -34,9 +34,9 @@ if ($confirm_convert_get != true && $convert_get != true && $ceon_bis_table_pres
     $conversion_offered = ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'convert=true') . '">Convert from CEON Back In Stock?</a><br/>';
 }
 
-$bis_show = $_GET['filter'];
-$product_id = $_POST['pid'];
-$subscriber = $_POST['sub_email'];
+$bis_show = zen_db_prepare_input($_GET['filter']);
+$product_id = zen_db_prepare_input($_POST['pid']);
+$subscriber = zen_db_prepare_input($_POST['sub_email']);
 
 switch ($bis_show) {
     case "all":
@@ -57,7 +57,7 @@ switch ($bis_show) {
         break;
 }
 
-$sort = $_GET['sort'];
+$sort = zen_db_prepare_input($_GET['sort']);
 if ($sort != '') {
     $order_by = " ORDER BY " . $sort . " ASC";
 } else {

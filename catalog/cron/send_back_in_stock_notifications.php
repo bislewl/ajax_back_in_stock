@@ -12,12 +12,12 @@ chdir(DIR_FS_CATALOG);
 require_once('includes/application_top.php');
 if ($_GET['key'] == BACK_IN_STOCK_CRON_KEY) {
     if ($_GET['product_id'] !== '') {
-        $products_id = $_GET['product_id'];
+        $products_id = zen_db_prepare_input($_GET['product_id']);
     } else {
         $products_id = 0;
     }
     if ($_GET['bis_id'] !== '') {
-        $bis_id = $_GET['bis_id'];
+        $bis_id = zen_db_prepare_input($_GET['bis_id']);
     } else {
         $bis_id = 0;
     }

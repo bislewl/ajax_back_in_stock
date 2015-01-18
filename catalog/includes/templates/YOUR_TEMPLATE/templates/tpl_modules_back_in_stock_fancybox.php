@@ -24,13 +24,13 @@ if ($_SESSION['customer_id']) {
                 <div id="back-in-stock-product-name">
                     <h2 id="productName">
                         <?php
-                        echo zen_get_products_name($_GET[products_id]);
+                        echo zen_get_products_name(zen_db_prepare_input($_GET[products_id]));
                         ?>
                     </h2>
                 </div>
                 <div id="back-in-stock-product-image">
                     <?php
-                    echo zen_get_products_image($_GET[products_id]);
+                    echo zen_get_products_image(zen_db_prepare_input($_GET[products_id]));
                     ?>
                 </div>
             </div>
@@ -47,7 +47,7 @@ if ($_SESSION['customer_id']) {
             <div class="clearBoth"></div>
             <?php echo zen_draw_input_field('email', ($customer_email), ' size="40" id="email-address" placeholder="' . BACK_IN_STOCK_EMAIL . '"'); ?>
         </div>
-        <?php echo zen_draw_hidden_field('product_id', $_GET[products_id]); ?>
+        <?php echo zen_draw_hidden_field('product_id', zen_db_prepare_input($_GET[products_id])); ?>
         <?php echo zen_draw_input_field('should_be_empty', '', ' size="40" style="visibility:hidden; display:none;" autocomplete="off"'); ?>
         <div class="clearBoth"></div>
         <div id="contact_messages">
