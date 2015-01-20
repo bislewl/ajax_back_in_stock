@@ -55,7 +55,7 @@
                         <li>Copy your files maintaining the folder structure, changing "YOUR_TEMPLATE" & "YOUR_ADMIN" to their respective folders</li>
                         <li>Log in to your Admin or load any page in your Admin, the module will self-install</li>
                         <li><ol>
-                                <li>Find<br/><TEXTAREA><div class="centerColumn" id="productGeneral"></TEXTAREA><br/>
+                                <li>Find (really this can go anywhere on the page you want it to load on)<br/><TEXTAREA><div class="centerColumn" id="productGeneral"></TEXTAREA><br/>
 Add After<br/> <TEXTAREA>
 <!--bof back in stock popup-->
 <?php require($template->get_template_dir('tpl_modules_back_in_stock_fancybox.php',DIR_WS_TEMPLATE, $current_page_base,'templates'). '/tpl_modules_back_in_stock_fancybox.php'); ?>
@@ -67,6 +67,26 @@ Add After<br/> <TEXTAREA>
 <a href="#back-in-stock-popup-wrapper" id="back-in-stock-popup-link"><?php echo BACK_IN_STOCK_LINK; ?></a>
 <?php } ?>
 </TEXTAREA>
+
+<h2>OR</h2>
+
+If you want to only show this when the product is out of stock do something like this:
+<textarea>
+    <?php
+if(zen_get_products_stock($products_id) > 0){
+?>
+<!--bof Add to Cart Box-->
+***the stuff between these***
+<!--eof Add to Cart Box-->
+<?php
+}
+else{
+ if(BACK_IN_STOCK_ENABLE == "true"){ ?>
+<a href="#back-in-stock-popup-wrapper" id="back-in-stock-popup-link"><?php echo BACK_IN_STOCK_LINK; ?></a>
+ <?php } 
+}
+</textarea>
+
                     </li>
                     <li>Add this where you want a link to the change the subscriptions
                         <TEXTAREA>
