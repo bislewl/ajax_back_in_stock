@@ -70,7 +70,7 @@ function back_in_stock_subscription($array, $change_type = "add") {
     global $db;
     $result = "Failed";
     $email = $array['email'];
-    $name = addslashes($array['name']);
+    $name = $array['name'];
     $product_id = $array['product_id'];
     $current_status = back_in_stock_status($email, $product_id);
     switch ($change_type) {
@@ -81,12 +81,12 @@ function back_in_stock_subscription($array, $change_type = "add") {
                 break;
             }
             $db->Execute("INSERT INTO " . TABLE_BACK_IN_STOCK . " (email, product_id, sub_date, sub_active, name, active_til_purch) VALUES
-                     ('" . $email . "', " . $product_id . ", NOW(), 1, '" . $name . "', " . BACK_IN_STOCK_ACTIVE_TIL_PURCH . " )");
+                     ('" . $email . "', " . $product_id . ", NOW(), 1, " .'"'. addslashes($name) .'"'.", " . BACK_IN_STOCK_ACTIVE_TIL_PURCH . " )");
             $bis_id = $db->Insert_ID();
             $result = "Subscribed";
             //send email
             if (BACK_IN_STOCK_EMAIL_SUBSCRIBE && $change_type != "bulk") {
-                $customers_name = stripslashes($name);
+                $customers_name = $name;
                 $customers_email = $email;
                 $html_message = array();
                 $html_message['CUSTOMERS_NAME'] = $customers_name;
