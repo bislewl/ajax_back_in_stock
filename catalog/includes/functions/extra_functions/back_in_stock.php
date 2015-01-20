@@ -70,7 +70,7 @@ function back_in_stock_subscription($array, $change_type = "add") {
     global $db;
     $result = "Failed";
     $email = $array['email'];
-    $name = $array['name'];
+    $name = addslashes($array['name']);
     $product_id = $array['product_id'];
     $current_status = back_in_stock_status($email, $product_id);
     switch ($change_type) {
@@ -86,7 +86,7 @@ function back_in_stock_subscription($array, $change_type = "add") {
             $result = "Subscribed";
             //send email
             if (BACK_IN_STOCK_EMAIL_SUBSCRIBE && $change_type != "bulk") {
-                $customers_name = $name;
+                $customers_name = stripslashes($name);
                 $customers_email = $email;
                 $html_message = array();
                 $html_message['CUSTOMERS_NAME'] = $customers_name;
@@ -172,7 +172,7 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
             }
             $bis_emails[] = array(
                 'email' => $bis_notifications->fields['email'],
-                'name' => $bis_notifications->fields['name'],
+                'name' => stripslashes($bis_notifications->fields['name']),
                 'product_id' => $bis_notifications->fields['product_id'],
                 'bis_id' => $bis_notifications->fields['bis_id'],
                 'active_til_purch' => $bis_notifications->fields['active_til_purch']
@@ -191,7 +191,7 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
             if ($counted >= (int) BACK_IN_STOCK_MAX_EMAILS_PER_BATCH) {
                 break;
             }
-            $customers_name = $emails['name'];
+            $customers_name = stripslashes($emails['name']);
             $customers_email = $emails['email'];
             $html_message = array();
             $html_message['CUSTOMERS_NAME'] = $customers_name;
@@ -249,7 +249,7 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
             }
             ?>
                 <tr>
-                    <td><?php echo $emails['name']; ?></td>
+                    <td><?php echo stripslashes($emails['name']); ?></td>
                     <td><?php echo $emails['email']; ?></td>
                     <td><?php echo zen_get_products_name($emails['product_id']); ?></td>
                 </tr>
