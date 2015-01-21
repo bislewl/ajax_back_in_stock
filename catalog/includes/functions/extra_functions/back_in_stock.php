@@ -159,6 +159,7 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
     while (!$bis_products->EOF) {
         if (zen_get_products_stock($bis_products->fields['product_id']) == 0) {
             $bis_products->MoveNext();
+            continue;
         }
         echo 'Back in stock: ' . zen_get_products_name($bis_products->fields['product_id']) . "\n" . "<br/>";
         $bis_notifications = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE sub_active=1 AND product_id=" . $bis_products->fields['product_id']);
