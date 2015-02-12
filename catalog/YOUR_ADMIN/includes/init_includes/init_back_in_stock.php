@@ -50,14 +50,15 @@ if (version_compare($newest_version, $current_version) > 0) {
 
 if (!function_exists('plugin_version_check_for_updates')) {
 
-    function plugin_version_check_for_updates($fileid = 0, $version_string_to_check = '') {
-        if ($fileid == 0) {
+    function plugin_version_check_for_updates($plugin_file_id = 0, $version_string_to_check = '') {
+        if ($plugin_file_id == 0) {
             return FALSE;
         }
         $new_version_available = FALSE;
         $lookup_index = 0;
-        $url = 'http://www.zen-cart.com/downloads.php?do=versioncheck' . '&id=' . (int) $fileid;
+         $url = 'https://www.zen-cart.com/downloads.php?do=versioncheck' . '&id='.(int)$plugin_file_id;
         $data = json_decode(file_get_contents($url), true);
+        if (!$data || !is_array($data)) return false;
         // compare versions
         if (version_compare($data[$lookup_index]['latest_plugin_version'], $version_string_to_check) > 0) {
             $new_version_available = TRUE;
