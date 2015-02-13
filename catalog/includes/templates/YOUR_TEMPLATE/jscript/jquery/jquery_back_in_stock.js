@@ -21,8 +21,7 @@ $(document).ready(function () {
     $('#productName').html($(productDiv).find('span.itemTitle').text());
     $('input[name="product_id"]').attr('value',$(productDiv).find('input[name="bis-product-id"]').attr('value'));
     $.fancybox({
-        href: '#back-in-stock-popup-wrapper', 
-        modal: true,
+        href: '#back-in-stock-popup-wrapper',
         afterShow: function () {
             $(document).on('submit', '#back-in-stock-popup-wrapper form[name="back_in_stock"]', function () {
                 $('#contact_messages').empty();
