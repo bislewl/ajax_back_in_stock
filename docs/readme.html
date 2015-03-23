@@ -76,9 +76,24 @@ if(BACK_IN_STOCK_ENABLE == "true"){
                     $return_button = zen_image_button(BUTTON_IMAGE_SOLD_OUT_SMALL, BUTTON_SOLD_OUT_SMALL_ALT);
                 }
 </TEXTAREA>
-
-
-                    </li>
+</li>
+<li>in your includes/functions/functions_general.php find:<br/>
+                        <TEXTAREA>
+                    
+$return_button = zen_image_button(BUTTON_IMAGE_SOLD_OUT, BUTTON_SOLD_OUT_ALT);
+</TEXTAREA>
+<br/>
+Replace with:<br/>
+<TEXTAREA>
+if(BACK_IN_STOCK_ENABLE == "true"){
+                $return_button = '<a class="back-in-stock-listing-popup-link" href="#back-in-stock-popup-wrapper">' . BACK_IN_STOCK_LINK . '</a>';
+                $return_button .= zen_draw_hidden_field('bis-product-id', (int) $product_id, 'class="bis-product-id"');
+                }
+                else{
+                    $return_button = zen_image_button(BUTTON_IMAGE_SOLD_OUT_SMALL, BUTTON_SOLD_OUT_SMALL_ALT);
+                }
+</TEXTAREA>
+</li>
                     <li>Add this where you want a link to the change the subscriptions
                         <TEXTAREA>
 <li><?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, '', 'SSL') . '">' . BACK_IN_STOCK_MY_ACCOUNT_LINK . '</a>'; ?></li>
