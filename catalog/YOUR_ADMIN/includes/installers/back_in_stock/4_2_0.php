@@ -6,3 +6,9 @@
 // Added Script to check if jquery is present to avoid duplicate loading
 // Modifed DIR_FS_CATALOG.'includes/modules/pages/index/jscript_back_in_stock.php' to self delete since older versions will have this file present
 // Modifed DIR_FS_CATALOG.'includes/modules/pages/product_info/jscript_back_in_stock.php' to self delete since older versions will have this file present
+
+// Getting rid of the files here too!
+if(file_exists(DIR_FS_CATALOG.'includes/modules/pages/index/jscript_back_in_stock.php')){
+         unlink(DIR_FS_CATALOG.'includes/modules/pages/index/jscript_back_in_stock.php');
+     }
+     
