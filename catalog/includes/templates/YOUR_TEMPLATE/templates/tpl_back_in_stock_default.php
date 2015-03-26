@@ -7,22 +7,22 @@
  */
 ?>
 <div id="backInStockPage">
-    <h2>Back In Stock Notifications</h2><br/>
+    <h2><?php echo BACK_IN_STOCK_TITLE ?></h2><br/>
     <?php
     if ($subcriptions) {
+        echo BACK_IN_STOCK_DESC;
         ?>
-        To unsubscribe from a list simply check the box beside the appropriate product and click unsubscribe.
-        <div class="currentNotificationsHead">
-            <b>Current Subscriptions for: <?php echo $email_info->fields['email'] ?></b>
+        <div class="currentNotificationsHead"></br>
+            <?php echo BACK_IN_STOCK_CURRENT, "<b>", $email_info->fields['email'],"</b>"?></br></br>
             <div class="currentNotifications">
                 <?php
                 echo zen_draw_form('back_in_stock', zen_href_link(FILENAME_BACK_IN_STOCK, '', ($_SERVER['HTTPS'] == 'on' ? 'SSL' : 'NONSSL')));
                 echo zen_draw_hidden_field('action', "stop");
                 ?>
                 <table>
-                    <th style="text-align: center;width: 20%;">Unsubscribe</th>
-                    <th style="text-align: left; width: 50%;">Product</th>
-                    <th style="text-align: left; width: 30%;">Date Subscribed</th>
+                    <th style="text-align: center;width: 20%;"><?php echo BACK_IN_STOCK_FIELD1 ?></th>
+                    <th style="text-align: left; width: 50%;"><?php echo BACK_IN_STOCK_FIELD2 ?></th>
+                    <th style="text-align: left; width: 30%;"><?php echo BACK_IN_STOCK_FIELD3 ?></th>
                     <?php
                     while (!$email_info->EOF) {
                         echo '<tr>';
@@ -34,12 +34,12 @@
                     }
                     ?>
                 </table>
-                <button type="submit" value="unsubscribe" style="float:left;">Unsubscribe</button>
+                <button type="submit" value="unsubscribe" style="float:left;"><?php echo BACK_IN_STOCK_BUTTON ?></button>
                 <br/>
                 </form> 
                 <?php
             } else {
-                echo 'No Active Notifications';
+                echo BACK_IN_STOCK_NONE;
             }
             ?>
         </div>

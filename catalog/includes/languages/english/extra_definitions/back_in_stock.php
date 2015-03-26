@@ -7,3 +7,21 @@
  */
 define('BACK_IN_STOCK_EMAIL', 'Email');
 define('BACK_IN_STOCK_NAME', 'Name');
+define('BACK_IN_STOCK_TITLE', 'Back In Stock Notifications');
+define('BACK_IN_STOCK_DESC','To unsubscribe from a list simply check the box beside the appropriate product and click unsubscribe.');
+define('BACK_IN_STOCK_BUTTON', 'Unsubscribe');
+define('BACK_IN_STOCK_CURRENT', 'Current Subscriptions for:');
+define('BACK_IN_STOCK_FIELD1', 'Unsubscribe');
+define('BACK_IN_STOCK_FIELD2', 'Product');
+define('BACK_IN_STOCK_FIELD3', 'Submission Date');
+define('BACK_IN_STOCK_NONE', 'No subscription found');
+define('BACK_IN_STOCK_LINK', 'Email me when back in stock');
+define('BACK_IN_STOCK_POPUP_HEADING', 'Sorry we ran out!');
+define('BACK_IN_STOCK_POPUP_SUBHEADING', 'Fill out this form and we will let you know when it comes back in stock', 'This Sub heading is in the popup');
+define('BACK_IN_STOCK_SEND_TEXT', 'Notify Me!!');
+define('BACK_IN_STOCK_SUCCESS', 'You have been Subscribed');
+define('BACK_IN_STOCK_NAME_ERROR', 'Your name does look right');
+define('BACK_IN_STOCK_EMAIL_ADDRESS_ERROR', 'Please check your email address');
+define('BACK_IN_STOCK_NO_PRODUCT_ERROR', 'Please select a product');
+define('BACK_IN_STOCK_ALREADY_SUB', 'You are already subscribed');
+define('BACK_IN_STOCK_MY_ACCOUNT_LINK', 'Change my Product Back In Stock Notifications');
