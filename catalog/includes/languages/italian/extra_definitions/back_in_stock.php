@@ -23,5 +23,19 @@ define('BACK_IN_STOCK_SUCCESS', 'Hai sottoscritto le notifiche');
 define('BACK_IN_STOCK_NAME_ERROR', 'Per favore controlla il nome');
 define('BACK_IN_STOCK_EMAIL_ADDRESS_ERROR', 'Per favore controlla l\'indirizzo Email');
 define('BACK_IN_STOCK_NO_PRODUCT_ERROR', 'Per favore seleziona un prodotto');
-define('BACK_IN_STOCK_ALREADY_SUB', 'Hai già sottoscritto le notifiche');
+define('BACK_IN_STOCK_ALREADY_SUB', 'Hai giï¿½ sottoscritto le notifiche');
 define('BACK_IN_STOCK_MY_ACCOUNT_LINK', 'Rimuovi le notifiche della disponibilita\' prodotti');
+//Email defines
+//@todo needs translation
+define('BACK_IN_STOCK_MAIL_TOP','Thank You for your interest in the ');
+define('BACK_IN_STOCK_MAIL_MAIN','. It has been added to your Wish List and you will be notified when it is available for purchase!');
+define('BACK_IN_STOCK_MAIL_BOTTOM','Please reply to this email with any questions');
+define('BACK_IN_STOCK_MAIL_GREETING','Dear ');
+define('BACK_IN_STOCK_MAIL_STATUS ',' Subscription is active ');
+define('BACK_IN_STOCK_MAIL_CANCEL','To unsubscribe click here ');
+define('BACK_IN_STOCK_MAIL_STATUS',' Subscription is active ');
+define('BACK_IN_STOCK_MAIL_TOP','Thank You for your interest in the ');
+define('BACK_IN_STOCK_MAIL_AVAILABLE','It is now available for purchase!');
+define('BACK_IN_STOCK_MAIL_BACK',' is Back In Stock at ');
+define('BACK_IN_STOCK_MAIL_SENT','Sent Email to: ');
+define('BACK_IN_STOCK_MAIL_MANY','Please Run Again');

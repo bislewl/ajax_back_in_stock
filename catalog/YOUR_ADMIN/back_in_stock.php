@@ -105,21 +105,21 @@ $record_count = $subscribers->RecordCount();
                         <tr>
                             <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td class="pageHeading">Back In Stock Notifications
+                                        <td class="pageHeading">HEADING_TITLE
                                             <br/>
                                             <?php echo $header_comment; ?>
                                         </td>
                                         <td class="pageHeading" align="right">
                                             <?php echo zen_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?>
                                             <?php
-                                            echo 'Email:';
+                                            echo HEADING_EMAIL.':';
                                             echo zen_draw_form('back_in_stock', FILENAME_BACK_IN_STOCK, 'filter=subscriber', 'post', '', true);
                                             echo zen_hide_session_id();
                                             echo zen_draw_input_field('sub_email')
                                             ?>
                                             </form><br/>
                                             <?php
-                                            echo 'Product ID:';
+                                            echo HEADING_PRODUCT_ID.':';
                                             echo zen_draw_form('back_in_stock', FILENAME_BACK_IN_STOCK, 'filter=subscriber', 'post', '', true);
                                             echo zen_hide_session_id();
                                             echo zen_draw_input_field('pid')
@@ -127,12 +127,12 @@ $record_count = $subscribers->RecordCount();
                                             </form><br/>
                                             <?php
                                             if ($bis_show != "all") {
-                                                echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'filter=all') . '">Show Active & Non-Active</a><br/>';
+                                                echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'filter=all') . '">'.HEADING_SHOW_ACTIVE_AND.'</a><br/>';
                                             }
                                             ?>
                                             <?php
                                             if ($bis_show != '') {
-                                                echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK) . '">Show Active Only</a><br/>';
+                                                echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK) . '">'.HEADING_SHOW_ACTIVE_ONLY.'</a><br/>';
                                             }
                                             ?>
                                         </td>
@@ -140,11 +140,11 @@ $record_count = $subscribers->RecordCount();
                                     <tr>
                                         <td>
                                             <form name="back_in_stock" action="<?php echo HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG . "cron/send_back_in_stock_notifications.php"; ?>" target="_blank" method="get">
-                                                Product: <?php echo zen_draw_products_pull_down('product_id', '> <option value="0">All Products</option'); ?>
+                                                Product: <?php echo zen_draw_products_pull_down('product_id', '> <option value="0">'.HEADING_ALL_PRODUCTS.'</option'); ?>
                                                 <?php echo zen_draw_hidden_field('key', BACK_IN_STOCK_CRON_KEY) ?>
                                                 <?php echo zen_draw_hidden_field('bis_id', '0') ?>
-                                                <?php echo 'Preview: ' . zen_draw_checkbox_field('preview', 'true', true) ?>
-                                                <input type="submit" value="Run Notifications">
+                                                <?php echo TEXT_PREVIEW.': ' . zen_draw_checkbox_field('preview', 'true', true) ?>
+                                                <input type="submit" value="<?php echo TEXT_RUN_NOTIFICATIONS; ?>">
                                             </form>
                                         </td>
                                         <td><?php
@@ -163,12 +163,12 @@ $record_count = $subscribers->RecordCount();
                         <tr class="dataTableHeadingRow">
                             <td class="dataTableHeadingContent" align="left" valign="top">ID</td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
-                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=sub_date') . '">Date Subscribed</a><br/>'; ?></td>
+                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=sub_date') . '">'.HEADING_DATE_SUBSCRIBED.'</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
-                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=email') . '">Email</a><br/>'; ?></td>
+                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=email') . '">'.HEADING_EMAIL.'</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">Active</td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
-                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=product_id') . '">Product</a><br/>'; ?></td>
+                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=product_id') . '">'.HEADING_PRODUCT.'</a><br/>'; ?></td>
                         </tr>
                         <?php
                         $rowi = 0;
@@ -203,7 +203,7 @@ $record_count = $subscribers->RecordCount();
                         <tr>
                             <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                                     <tbody><tr>
-                                            <td class="smallText" valign="top">Displaying <?php echo $record_count; ?> Active Notification Subscriptions</td>
+                                            <td class="smallText" valign="top"><?php echo TEXT_DISPLAYING.' '.$record_count.' '.TEXT_ACTIVE_NOTIFCATIONS; ?></td>
                                             <td class="smallText" align="right"></td>
                                         </tr>
                                     </tbody></table></td>
@@ -221,22 +221,22 @@ $record_count = $subscribers->RecordCount();
                     </table>
                     <table border="0" width="100%" cellspacing="0" cellpadding="2">
                         <tr>
-                            <td class="infoBoxContent"><br><b>Subscription Started:</b> <?php echo $bis_sub_info['sub_date']; ?></td>
+                            <td class="infoBoxContent"><br><b><?php echo HEADING_SUBSCRIPTION_STARTED; ?>:</b> <?php echo $bis_sub_info['sub_date']; ?></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br><b>Subscription Active:</b> <?php echo ($bis_sub_info['sub_active'] == 1 ? 'Y' : 'N'); ?></td>
+                            <td class="infoBoxContent"><br><b><?php echo HEADING_SUBSCRIPTION_ACTIVE; ?>:</b> <?php echo ($bis_sub_info['sub_active'] == 1 ? 'Y' : 'N'); ?></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br><b>Product:</b> <?php echo zen_get_products_name($bis_sub_info['product_id']); ?></td>
+                            <td class="infoBoxContent"><br><b><?php echo HEADING_PRODUCT; ?>:</b> <?php echo zen_get_products_name($bis_sub_info['product_id']); ?></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br><b>Canceled When Purchased:</b> <?php echo ($bis_sub_info['active_til_purch'] == 1 ? 'Y' : 'N'); ?></td>
+                            <td class="infoBoxContent"><br><b><?php echo HEADING_CANCEL_W_PURCHASE; ?>:</b> <?php echo ($bis_sub_info['active_til_purch'] == 1 ? 'Y' : 'N'); ?></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br><b>Last Sent:</b> <?php echo $bis_sub_info['last_sent']; ?></td>
+                            <td class="infoBoxContent"><br><b><?php echo HEADING_LAST_SENT; ?>:</b> <?php echo $bis_sub_info['last_sent']; ?></td>
                         </tr>
                         <tr>
-                            <td class="infoBoxContent"><br><b>Flagged As Spam:</b> <?php echo ($bis_sub_info['spam'] == 1 ? 'Y' : 'N'); ?></td>
+                            <td class="infoBoxContent"><br><b><?php echo HEADING_FLAG_SPAM; ?>:</b> <?php echo ($bis_sub_info['spam'] == 1 ? 'Y' : 'N'); ?></td>
                         </tr>
                         <tr>
                             <td class="infoBoxContent"></td>
@@ -246,7 +246,7 @@ $record_count = $subscribers->RecordCount();
             </tr>
         </table>
         <!-- body_eof //-->
-        File to add to your cron in cpanel: <?php echo "'" . HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG . "cron/send_back_in_stock_notifications.php?key=" . BACK_IN_STOCK_CRON_KEY . "' "; ?>
+        <?php echo TEXT_HINT_ADD_TO_CPANEL.": '" . HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG . "cron/send_back_in_stock_notifications.php?key=" . BACK_IN_STOCK_CRON_KEY . "' "; ?>
         <!-- footer //-->
         <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
         <!-- footer_eof //-->
