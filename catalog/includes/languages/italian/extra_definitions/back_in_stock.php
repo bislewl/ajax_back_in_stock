@@ -26,16 +26,15 @@ define('BACK_IN_STOCK_NO_PRODUCT_ERROR', 'Per favore seleziona un prodotto');
 define('BACK_IN_STOCK_ALREADY_SUB', 'Hai gi� sottoscritto le notifiche');
 define('BACK_IN_STOCK_MY_ACCOUNT_LINK', 'Rimuovi le notifiche della disponibilita\' prodotti');
 //Email defines
-//@todo needs translation
-define('BACK_IN_STOCK_MAIL_TOP','Thank You for your interest in the ');
-define('BACK_IN_STOCK_MAIL_MAIN','. It has been added to your Wish List and you will be notified when it is available for purchase!');
-define('BACK_IN_STOCK_MAIL_BOTTOM','Please reply to this email with any questions');
-define('BACK_IN_STOCK_MAIL_GREETING','Dear ');
-define('BACK_IN_STOCK_MAIL_STATUS ',' Subscription is active ');
-define('BACK_IN_STOCK_MAIL_CANCEL','To unsubscribe click here ');
-define('BACK_IN_STOCK_MAIL_STATUS',' Subscription is active ');
-define('BACK_IN_STOCK_MAIL_TOP','Thank You for your interest in the ');
-define('BACK_IN_STOCK_MAIL_AVAILABLE','It is now available for purchase!');
-define('BACK_IN_STOCK_MAIL_BACK',' is Back In Stock at ');
-define('BACK_IN_STOCK_MAIL_SENT','Sent Email to: ');
-define('BACK_IN_STOCK_MAIL_MANY','Please Run Again');
+define('BACK_IN_STOCK_MAIL_TOP','Grazie per l\'interesse in ');
+define('BACK_IN_STOCK_MAIL_MAIN','. &Egrave; stato aggiunto alla tua Lista dei Desideri e sarai avvisato non appena sar&agrave; disponibile');
+define('BACK_IN_STOCK_MAIL_BOTTOM','Rispondi pure a quaeta Mail se hai domande');
+define('BACK_IN_STOCK_MAIL_GREETING','Gentile ');
+define('BACK_IN_STOCK_MAIL_STATUS ',' Sottoscrizione attiva ');
+define('BACK_IN_STOCK_MAIL_CANCEL','Per cancellare la sottoscrizione clicca qui ');
+define('BACK_IN_STOCK_MAIL_STATUS',' La sottoscrizione &egrave; attiva ');
+define('BACK_IN_STOCK_MAIL_TOP','Grazie per il tuo interesse in ');
+define('BACK_IN_STOCK_MAIL_AVAILABLE','&egrave; disponibile per l\'acquisto!');
+define('BACK_IN_STOCK_MAIL_BACK',' &grave; di nuovo disponibile a ');
+define('BACK_IN_STOCK_MAIL_SENT','Manda una mail a: ');
+define('BACK_IN_STOCK_MAIL_MANY','Per favore Esegui di nuovo');
