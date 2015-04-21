@@ -3,13 +3,26 @@
     Author     : bislewl <bislewl@gmail.com>
 */
 
-body{
-    width:100%;
-
+body{width:100%;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  background-image: url("../images/bg.png");
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  background-clip: border-box;
+  background-origin: padding-box;
+  background-size: auto auto;
+  font-family: "Roboto Condensed",sans-serif;
+  font-size: 80%;
+  color: #444444;
 }
+
 #header{
-    width: 100%;
-    background-color: grey;
+    width: 60%;
+    background-color:#fff;
 }
 #disclaimer{
     background-color: red;
@@ -20,16 +33,17 @@ body{
     padding: 15px;
 }
 #logo{
-    float:left;
+    float:left;padding-left:15%
 }
 #moduleName{
-    float: left;
     margin-top: 50px;
     margin-left: 200px;
-    font-size: 60px;
-    text-align: center;
+    font-size: 400%;color:#EB8723;
+    text-align: right;padding-right:15%
 }
-
+.donate{
+    float:right;text-align: center;padding-right:15%
+}
 
 .etabs { margin: 0; padding: 0; }
 .tab { display: inline-block; zoom:1; *display:inline; background: #eee; border: solid 1px #999; border-bottom: none; -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; }
@@ -50,10 +64,12 @@ body{
 #tabs-install{
     font-weight: bold;
 }
+#tabs-about{
+    font-weight: bold;padding:15px
+}
 #readme{
-    width: 850px;
-    margin-left: 200px;
-    background: #D4E0E7;
+    width: 60%;
+    margin:auto;background:#fff
 }
 
 #tab-container{
@@ -67,9 +83,7 @@ textarea{
     height: 100px;
 }
 #top-info{
-    padding-left: 15px;
-    padding-right: 15px;
-    text-align: center;
+    padding-left: 15px;padding-right: 15px;background:#fff
 }
 .etabs{
     margin-bottom: 30px;
