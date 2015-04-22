@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright Copyright 2010-2014  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
- * @copyright Copyright 2003-2014 Zen Cart Development Team
+ * @copyright Copyright 2010-2015  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
+ * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
@@ -27,7 +27,7 @@ define('BACK_IN_STOCK_ALREADY_SUB', 'Hai gi� sottoscritto le notifiche');
 define('BACK_IN_STOCK_MY_ACCOUNT_LINK', 'Rimuovi le notifiche della disponibilita\' prodotti');
 //Email defines
 define('BACK_IN_STOCK_MAIL_TOP','Grazie per l\'interesse in ');
-define('BACK_IN_STOCK_MAIL_MAIN','. &Egrave; stato aggiunto alla tua Lista dei Desideri e sarai avvisato non appena sar&agrave; disponibile');
+define('BACK_IN_STOCK_MAIL_MAIN','&Egrave; stato aggiunto alla tua Lista dei Desideri e sarai avvisato non appena sar&agrave; disponibile');
 define('BACK_IN_STOCK_MAIL_BOTTOM','Rispondi pure a quaeta Mail se hai domande');
 define('BACK_IN_STOCK_MAIL_GREETING','Gentile ');
 define('BACK_IN_STOCK_MAIL_STATUS ',' Sottoscrizione attiva ');

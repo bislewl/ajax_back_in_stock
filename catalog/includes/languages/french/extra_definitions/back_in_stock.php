@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright Copyright 2010-2014  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
- * @copyright Copyright 2003-2014 Zen Cart Development Team
+ * @copyright Copyright 2010-2015  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
+ * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
@@ -28,7 +28,7 @@ define('BACK_IN_STOCK_MY_ACCOUNT_LINK', 'Modifier mes notifications');
 
 //Email defines
 define('BACK_IN_STOCK_MAIL_TOP','Merci de votre intérêt pour le ');
-define('BACK_IN_STOCK_MAIL_MAIN','. Il a été ajouté à votre liste d\'envies et vous sera informé quand il est disponible à l\'achat!');
+define('BACK_IN_STOCK_MAIL_MAIN','Il a été ajouté à votre liste d\'envies et vous sera informé quand il est disponible à l\'achat!');
 define('BACK_IN_STOCK_MAIL_BOTTOM','Se il vous plaît répondez à ce message avec toutes les questions');
 define('BACK_IN_STOCK_MAIL_GREETING','Cher ');
 define('BACK_IN_STOCK_MAIL_STATUS ',' Souscription es actif ');

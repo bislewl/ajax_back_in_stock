@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright Copyright 2010-2014  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
- * @copyright Copyright 2003-2014 Zen Cart Development Team
+ * @copyright Copyright 2010-2015  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
+ * @copyright Copyright 2003-2015 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
@@ -27,7 +27,7 @@ define('BACK_IN_STOCK_ALREADY_SUB', 'You are already subscribed');
 define('BACK_IN_STOCK_MY_ACCOUNT_LINK', 'Change my Product Back In Stock Notifications');
 //Email defines
 define('BACK_IN_STOCK_MAIL_TOP','Thank You for your interest in the ');
-define('BACK_IN_STOCK_MAIL_MAIN','. It has been added to your Wish List and you will be notified when it is available for purchase!');
+define('BACK_IN_STOCK_MAIL_MAIN','It has been added to your Wish List and you will be notified when it is available for purchase!');
 define('BACK_IN_STOCK_MAIL_BOTTOM','Please reply to this email with any questions');
 define('BACK_IN_STOCK_MAIL_GREETING','Dear ');
 define('BACK_IN_STOCK_MAIL_STATUS ',' Subscription is active ');
