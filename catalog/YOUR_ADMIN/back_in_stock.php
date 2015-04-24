@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright Copyright 2010-2015  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
- * @copyright Copyright 2003-2015 Zen Cart Development Team
+ * @copyright Copyright 2010-2014  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
+ * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
@@ -105,7 +105,7 @@ $record_count = $subscribers->RecordCount();
                         <tr>
                             <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td class="pageHeading">HEADING_TITLE
+                                        <td class="pageHeading"><?php echo HEADING_TITLE; ?>
                                             <br/>
                                             <?php echo $header_comment; ?>
                                         </td>
