@@ -6,6 +6,7 @@
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
+$subcriptions = false;
 $action = zen_db_prepare_input($_POST['action']);
 if (is_array($_POST['bis_id'])) {
     switch ($action) {
@@ -23,7 +24,7 @@ if (is_array($_POST['bis_id'])) {
             back_in_stock_subscription(array('bis_id' => $bis_id), "delete");
             break;
     }
-    $bis_id_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE bis_id='" . zen_db_prepare_input($_POST['bis_id'][0])."'");
+    $bis_id_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE bis_id='" . zen_db_prepare_input($_POST['bis_id'][0])."' AND sub_active=1");
     if ($bis_id_info->RecordCount() > 0) {
         $subcriptions = true;
         $email_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE email LIKE '" . $bis_id_info->fields['email'] . "' AND sub_active=1");
@@ -33,7 +34,7 @@ if (is_array($_POST['bis_id'])) {
 }
 else{
     if((int)$_GET['bis_id'] > 0){
-        $bis_id_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE bis_id='" . (int)$_GET['bis_id']."'");
+        $bis_id_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE bis_id='" . (int)$_GET['bis_id']."' AND sub_active=1");
     if ($bis_id_info->RecordCount() > 0) {
         $subcriptions = true;
         $email_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE email LIKE '" . $bis_id_info->fields['email'] . "' AND sub_active=1");
