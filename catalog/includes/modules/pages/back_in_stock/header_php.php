@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright Copyright 2010-2015  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
- * @copyright Copyright 2003-2015 Zen Cart Development Team
+ * @copyright Copyright 2010-2014  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
+ * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
@@ -23,12 +23,23 @@ if (is_array($_POST['bis_id'])) {
             back_in_stock_subscription(array('bis_id' => $bis_id), "delete");
             break;
     }
-    $bis_id_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE bis_id=" . zen_db_prepare_input($_POST['bis_id'][0]));
+    $bis_id_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE bis_id='" . zen_db_prepare_input($_POST['bis_id'][0])."'");
     if ($bis_id_info->RecordCount() > 0) {
         $subcriptions = true;
         $email_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE email LIKE '" . $bis_id_info->fields['email'] . "' AND sub_active=1");
     } else {
         $subcriptions = false;
+    }
+}
+else{
+    if((int)$_GET['bis_id'] > 0){
+        $bis_id_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE bis_id='" . (int)$_GET['bis_id']."'");
+    if ($bis_id_info->RecordCount() > 0) {
+        $subcriptions = true;
+        $email_info = $db->Execute("SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE email LIKE '" . $bis_id_info->fields['email'] . "' AND sub_active=1");
+    } else {
+        $subcriptions = false;
+    }
     }
 }
 if ($_SESSION['customer_id']) {
