@@ -167,6 +167,7 @@ $record_count = $subscribers->RecordCount();
                             <td class="dataTableHeadingContent" align="center" valign="top">
                                 <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=email') . '">'.HEADING_EMAIL.'</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">Active</td>
+                            <td class="dataTableHeadingContent" align="center" valign="top">HEADING_PRODUCT_MODEL</td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
                                 <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=product_id') . '">'.HEADING_PRODUCT.'</a><br/>'; ?></td>
                         </tr>
@@ -194,6 +195,7 @@ $record_count = $subscribers->RecordCount();
                                 <td class="dataTableContent" align="center"><?php echo $subscribers->fields['sub_date']; ?></td>
                                 <td class="dataTableContent" align="center"><?php echo $subscribers->fields['email']; ?></td>
                                 <td class="dataTableContent" align="center"><?php echo ($subscribers->fields['sub_active'] == 1 ? 'Y' : 'N'); ?></td>
+                                <td class="dataTableContent" align="center"><?php echo zen_get_products_model($subscribers->fields['product_id']); ?></td>
                                 <td class="dataTableContent" align="center"><?php echo zen_get_products_name($subscribers->fields['product_id']); ?></td>
                             </tr>
                             <?php

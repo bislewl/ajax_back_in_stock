@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright Copyright 2010-2015  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
- * @copyright Copyright 2003-2015 Zen Cart Development Team
+ * @copyright Copyright 2010-2014  ZenCart.codes Owned & Operated by PRO-Webs, Inc. 
+ * @copyright Copyright 2003-2014 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
  */
@@ -20,9 +20,11 @@
                 echo zen_draw_hidden_field('action', "stop");
                 ?>
                 <table>
+                    <tr>
                     <th style="text-align: center;width: 20%;"><?php echo BACK_IN_STOCK_FIELD1 ?></th>
                     <th style="text-align: left; width: 50%;"><?php echo BACK_IN_STOCK_FIELD2 ?></th>
                     <th style="text-align: left; width: 30%;"><?php echo BACK_IN_STOCK_FIELD3 ?></th>
+                    </tr>
                     <?php
                     while (!$email_info->EOF) {
                         echo '<tr>';
@@ -44,4 +46,3 @@
             ?>
         </div>
     </div>
-</div>
