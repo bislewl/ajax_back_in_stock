@@ -189,7 +189,7 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
             if ($emails['email'] == '')
                 continue;
             $counted++;
-            if ($counted >= (int) BACK_IN_STOCK_MAX_EMAILS_PER_BATCH) {
+            if ($counted >= (int) BACK_IN_STOCK_MAX_EMAILS_PER_BATCH && BACK_IN_STOCK_MAX_EMAILS_PER_BATCH != '0') {
                 break;
             }
             $customers_name = stripslashes($emails['name']);
