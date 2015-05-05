@@ -168,7 +168,7 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
             $your_date = strtotime($bis_notifications->fields['last_sent']);
             $datediff = $now - $your_date;
             $days_since = floor($datediff / (60 * 60 * 24));
-            if (BACK_IN_STOCK_DAYS_WAITING > $days_since) {
+            if (BACK_IN_STOCK_DAYS_WAITING > $days_since && BACK_IN_STOCK_DAYS_WAITING != '0') {
                 $bis_notifications->MoveNext();
             }
             $bis_emails[] = array(
