@@ -120,14 +120,14 @@ function back_in_stock_subscription($array, $change_type = "add") {
                 break;
             }
             $i = 0;
-            $update = '';
+            $update = "";
             foreach ($array as $key => $value) {
                 if ($key != "bis_id") {
                     $i++;
                     if ($i > 1) {
                         $update .= ", ";
                     }
-                    $update .= " " . $key . "=" . $value;
+                    $update .= " " . $key . "='" . $value."' ";
                 } else {
                     $where = " WHERE bis_id=" . (int) $value;
                 }
