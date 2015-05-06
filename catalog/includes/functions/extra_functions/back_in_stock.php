@@ -127,7 +127,7 @@ function back_in_stock_subscription($array, $change_type = "add") {
                     if ($i > 1) {
                         $update .= ", ";
                     }
-                    $update .= " " . $key . "=" . (int) $value;
+                    $update .= " " . $key . "=" . $value;
                 } else {
                     $where = " WHERE bis_id=" . (int) $value;
                 }
