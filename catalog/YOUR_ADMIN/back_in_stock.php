@@ -63,9 +63,31 @@ if ($sort != '') {
 } else {
     $order_by = " ";
 }
-$subscribers = $db->Execute($sql_statement . $order_by);
+$subscribers_query_raw = $sql_statement . $order_by;
 
+// Split Page
+// reset page when page is unknown
+if (($_GET['page'] == '' or $_GET['page'] == '1')) {
+  $check_page = $db->Execute($subscribers_query_raw);
+  $check_count=1;
+  if ($check_page->RecordCount() > MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER) {
+    while (!$check_page->EOF) {
+      if ($check_page->fields['customers_id'] == $_GET['cID']) {
+        break;
+      }
+      $check_count++;
+      $check_page->MoveNext();
+    }
+    $_GET['page'] = round((($check_count/MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER)+(fmod_round($check_count,MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER) !=0 ? .5 : 0)),0);
+//    zen_redirect(zen_href_link(FILENAME_CUSTOMERS, 'cID=' . $_GET['cID'] . (isset($_GET['page']) ? '&page=' . $_GET['page'] : ''), 'NONSSL'));
+  } else {
+    $_GET['page'] = 1;
+  }
+}
 
+    $subscribers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER, $subscribers_query_raw, $subscribers_query_numrows);
+    $subscribers = $db->Execute($subscribers_query_raw);
+    
 $record_count = $subscribers->RecordCount();
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -173,6 +195,7 @@ $record_count = $subscribers->RecordCount();
                         </tr>
                         <?php
                         $rowi = 0;
+                        
                         while (!$subscribers->EOF) {
                             $rowi++;
                             if ($rowi % 2 == 0) {
@@ -205,9 +228,9 @@ $record_count = $subscribers->RecordCount();
                         <tr>
                             <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                                     <tbody><tr>
-                                            <td class="smallText" valign="top"><?php echo TEXT_DISPLAYING.' '.$record_count.' '.TEXT_ACTIVE_NOTIFCATIONS; ?></td>
-                                            <td class="smallText" align="right"></td>
-                                        </tr>
+                                            <td class="smallText" valign="top"><?php echo $subscribers_split->display_count($subscribers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
+                    <td class="smallText" align="right"><?php echo $subscribers_split->display_links($subscribers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], zen_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
+                  </tr>
                                     </tbody></table></td>
                         </tr>
                     </table>
