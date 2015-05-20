@@ -24,4 +24,4 @@ define('HEADING_CANCEL_W_PURCHASE', 'Annulé lors de l\'achat');
 define('HEADING_LAST_SENT', 'Dernière envoyés');
 define('HEADING_FLAG_SPAM', 'Marqués comme spam');
 define('TEXT_HINT_ADD_TO_CPANEL', 'Fichier à ajouter à votre cron dans cPanel');
-defune('HEADING_PRODUCT_MODEL','Model'); // needs translation
+define('HEADING_PRODUCT_MODEL','Model'); // needs translation
