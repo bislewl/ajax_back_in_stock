@@ -204,6 +204,7 @@ $record_count = $subscribers->RecordCount();
                         $rowi = 0;
 
                         while (!$subscribers->EOF) {
+                            // BOF Check for products that aren't present and delete
                             if($subscribers->fields['products_name'] == ''){
                                 $product_present = $db->Execute("SELECT * FROM ".TABLE_PRODUCTS." WHERE products_id='".$subscribers->fields['products_name']."'");
                                 if($product_present->RecordCount() == 0){
@@ -212,6 +213,7 @@ $record_count = $subscribers->RecordCount();
                                     continue;
                                 }
                             }
+                            // EOF Check for products that aren't present and delete
                             $rowi++;
                             if ($rowi % 2 == 0) {
                                 $over = 'Over';
