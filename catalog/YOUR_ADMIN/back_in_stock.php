@@ -37,14 +37,14 @@ if ($confirm_convert_get != true && $convert_get != true && $ceon_bis_table_pres
 $bis_show = zen_db_prepare_input($_GET['filter']);
 $product_id = zen_db_prepare_input($_POST['pid']);
 $subscriber = zen_db_prepare_input($_POST['sub_email']);
-$start_sql = "SELECT * FROM " . TABLE_BACK_IN_STOCK. " bis LEFT JOIN ".TABLE_PRODUCTS." p on(bis.product_id = p.products_id) LEFT JOIN ".TABLE_PRODUCTS_DESCRIPTION." pd on(p.products_id = pd.products_id) ";
+$start_sql = "SELECT * FROM " . TABLE_BACK_IN_STOCK . " bis LEFT JOIN " . TABLE_PRODUCTS . " p on(bis.product_id = p.products_id) LEFT JOIN " . TABLE_PRODUCTS_DESCRIPTION . " pd on(p.products_id = pd.products_id) ";
 switch ($bis_show) {
     case "all":
         $sql_statement = $start_sql;
         $header_comment = "showing all active and non active subscriptions";
         break;
     case "product":
-        $sql_statement = $start_sql. " WHERE bis.product_id=" . $product_id . " AND bis.sub_active = 1";
+        $sql_statement = $start_sql . " WHERE bis.product_id=" . $product_id . " AND bis.sub_active = 1";
         $header_comment = "showing all active subscriptions to " . zen_get_products_name($product_id);
         break;
     case "subscriber":
@@ -58,8 +58,13 @@ switch ($bis_show) {
 }
 
 $sort = zen_db_prepare_input($_GET['sort']);
+$sort_o = zen_db_prepare_input($_GET['sort_o']);
 if ($sort != '') {
-    $order_by = " ORDER BY " . $sort . " ASC";
+    if ($sort_o != 'desc') {
+        $order_by = " ORDER BY " . $sort . " ASC";
+    } else {
+        $order_by = " ORDER BY " . $sort . " DESC";
+    }
 } else {
     $order_by = " ";
 }
@@ -68,26 +73,26 @@ $subscribers_query_raw = $sql_statement . $order_by;
 // Split Page
 // reset page when page is unknown
 if (($_GET['page'] == '' or $_GET['page'] == '1')) {
-  $check_page = $db->Execute($subscribers_query_raw);
-  $check_count=1;
-  if ($check_page->RecordCount() > MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER) {
-    while (!$check_page->EOF) {
-      if ($check_page->fields['customers_id'] == $_GET['cID']) {
-        break;
-      }
-      $check_count++;
-      $check_page->MoveNext();
-    }
-    $_GET['page'] = round((($check_count/MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER)+(fmod_round($check_count,MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER) !=0 ? .5 : 0)),0);
+    $check_page = $db->Execute($subscribers_query_raw);
+    $check_count = 1;
+    if ($check_page->RecordCount() > MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER) {
+        while (!$check_page->EOF) {
+            if ($check_page->fields['customers_id'] == $_GET['cID']) {
+                break;
+            }
+            $check_count++;
+            $check_page->MoveNext();
+        }
+        $_GET['page'] = round((($check_count / MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER) + (fmod_round($check_count, MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER) != 0 ? .5 : 0)), 0);
 //    zen_redirect(zen_href_link(FILENAME_CUSTOMERS, 'cID=' . $_GET['cID'] . (isset($_GET['page']) ? '&page=' . $_GET['page'] : ''), 'NONSSL'));
-  } else {
-    $_GET['page'] = 1;
-  }
+    } else {
+        $_GET['page'] = 1;
+    }
 }
 
-    $subscribers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER, $subscribers_query_raw, $subscribers_query_numrows);
-    $subscribers = $db->Execute($subscribers_query_raw);
-    
+$subscribers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER, $subscribers_query_raw, $subscribers_query_numrows);
+$subscribers = $db->Execute($subscribers_query_raw);
+
 $record_count = $subscribers->RecordCount();
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -134,14 +139,14 @@ $record_count = $subscribers->RecordCount();
                                         <td class="pageHeading" align="right">
                                             <?php echo zen_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?>
                                             <?php
-                                            echo HEADING_EMAIL.':';
+                                            echo HEADING_EMAIL . ':';
                                             echo zen_draw_form('back_in_stock', FILENAME_BACK_IN_STOCK, 'filter=subscriber', 'post', '', true);
                                             echo zen_hide_session_id();
                                             echo zen_draw_input_field('sub_email')
                                             ?>
                                             </form><br/>
                                             <?php
-                                            echo HEADING_PRODUCT_ID.':';
+                                            echo HEADING_PRODUCT_ID . ':';
                                             echo zen_draw_form('back_in_stock', FILENAME_BACK_IN_STOCK, 'filter=subscriber', 'post', '', true);
                                             echo zen_hide_session_id();
                                             echo zen_draw_input_field('pid')
@@ -149,12 +154,12 @@ $record_count = $subscribers->RecordCount();
                                             </form><br/>
                                             <?php
                                             if ($bis_show != "all") {
-                                                echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'filter=all') . '">'.HEADING_SHOW_ACTIVE_AND.'</a><br/>';
+                                                echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'filter=all') . '">' . HEADING_SHOW_ACTIVE_AND . '</a><br/>';
                                             }
                                             ?>
                                             <?php
                                             if ($bis_show != '') {
-                                                echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK) . '">'.HEADING_SHOW_ACTIVE_ONLY.'</a><br/>';
+                                                echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK) . '">' . HEADING_SHOW_ACTIVE_ONLY . '</a><br/>';
                                             }
                                             ?>
                                         </td>
@@ -162,10 +167,10 @@ $record_count = $subscribers->RecordCount();
                                     <tr>
                                         <td>
                                             <form name="back_in_stock" action="<?php echo HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG . "cron/send_back_in_stock_notifications.php"; ?>" target="_blank" method="get">
-                                                Product: <?php echo zen_draw_products_pull_down('product_id', '> <option value="0">'.HEADING_ALL_PRODUCTS.'</option'); ?>
+                                                Product: <?php echo zen_draw_products_pull_down('product_id', '> <option value="0">' . HEADING_ALL_PRODUCTS . '</option'); ?>
                                                 <?php echo zen_draw_hidden_field('key', BACK_IN_STOCK_CRON_KEY) ?>
                                                 <?php echo zen_draw_hidden_field('bis_id', '0') ?>
-                                                <?php echo TEXT_PREVIEW.': ' . zen_draw_checkbox_field('preview', 'true', true) ?>
+                                                <?php echo TEXT_PREVIEW . ': ' . zen_draw_checkbox_field('preview', 'true', true) ?>
                                                 <input type="submit" value="<?php echo TEXT_RUN_NOTIFICATIONS; ?>">
                                             </form>
                                         </td>
@@ -185,18 +190,28 @@ $record_count = $subscribers->RecordCount();
                         <tr class="dataTableHeadingRow">
                             <td class="dataTableHeadingContent" align="left" valign="top">ID</td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
-                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=sub_date') . '">'.HEADING_DATE_SUBSCRIBED.'</a><br/>'; ?></td>
+                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=sub_date') . '">' . HEADING_DATE_SUBSCRIBED . '</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
-                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=email') . '">'.HEADING_EMAIL.'</a><br/>'; ?></td>
+                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=email') . '">' . HEADING_EMAIL . '</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">Active</td>
-                            <td class="dataTableHeadingContent" align="center" valign="top"><?php echo HEADING_PRODUCT_MODEL;?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
-                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=product_id') . '">'.HEADING_PRODUCT.'</a><br/>'; ?></td>
+                            <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=products_model') . '">' . HEADING_PRODUCT_MODEL . '</a><br/>'; ?></td>
+                            <td class="dataTableHeadingContent" align="center" valign="top">
+                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=products_name') . '">' . HEADING_PRODUCT . '</a><br/>'; ?></td>
+                            <td class="dataTableHeadingContent" align="center" valign="top"><?php echo HEADING_STOCK_LEVEL; ?></td>
                         </tr>
                         <?php
                         $rowi = 0;
-                        
+
                         while (!$subscribers->EOF) {
+                            if($subscribers->fields['products_name'] == ''){
+                                $product_present = $db->Execute("SELECT * FROM ".TABLE_PRODUCTS." WHERE products_id='".$subscribers->fields['products_name']."'");
+                                if($product_present->RecordCount() == 0){
+                                    $db->Execute("DELETE FROM ".TABLE_BACK_IN_STOCK." WHERE bis_id='".$subscribers->fields['bis_id']."'");
+                                    $subscribers->MoveNext();
+                                    continue;
+                                }
+                            }
                             $rowi++;
                             if ($rowi % 2 == 0) {
                                 $over = 'Over';
@@ -220,6 +235,7 @@ $record_count = $subscribers->RecordCount();
                                 <td class="dataTableContent" align="center"><?php echo ($subscribers->fields['sub_active'] == 1 ? 'Y' : 'N'); ?></td>
                                 <td class="dataTableContent" align="center"><?php echo $subscribers->fields['products_model']; ?></td>
                                 <td class="dataTableContent" align="center"><?php echo $subscribers->fields['products_name']; ?></td>
+                                <td class="dataTableContent" align="center"><?php echo $subscribers->fields['products_quantity']; ?></td>
                             </tr>
                             <?php
                             $subscribers->MoveNext();
@@ -229,8 +245,8 @@ $record_count = $subscribers->RecordCount();
                             <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                                     <tbody><tr>
                                             <td class="smallText" valign="top"><?php echo $subscribers_split->display_count($subscribers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                    <td class="smallText" align="right"><?php echo $subscribers_split->display_links($subscribers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], zen_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
-                  </tr>
+                                            <td class="smallText" align="right"><?php echo $subscribers_split->display_links($subscribers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS_CUSTOMER, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], zen_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
+                                        </tr>
                                     </tbody></table></td>
                         </tr>
                     </table>
@@ -271,11 +287,12 @@ $record_count = $subscribers->RecordCount();
             </tr>
         </table>
         <!-- body_eof //-->
-        <?php echo TEXT_HINT_ADD_TO_CPANEL.": '" . HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG . "cron/send_back_in_stock_notifications.php?key=" . BACK_IN_STOCK_CRON_KEY . "' "; ?>
+        <?php echo TEXT_HINT_ADD_TO_CPANEL . ": '" . HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG . "cron/send_back_in_stock_notifications.php?key=" . BACK_IN_STOCK_CRON_KEY . "' "; ?>
         <!-- footer //-->
         <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
         <!-- footer_eof //-->
         <br>
     </body>
 </html>
-<?php require(DIR_WS_INCLUDES . 'application_bottom.php');
+<?php
+require(DIR_WS_INCLUDES . 'application_bottom.php');
