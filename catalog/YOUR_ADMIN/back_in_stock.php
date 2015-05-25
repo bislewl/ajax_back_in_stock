@@ -37,22 +37,22 @@ if ($confirm_convert_get != true && $convert_get != true && $ceon_bis_table_pres
 $bis_show = zen_db_prepare_input($_GET['filter']);
 $product_id = zen_db_prepare_input($_POST['pid']);
 $subscriber = zen_db_prepare_input($_POST['sub_email']);
-
+$start_sql = "SELECT * FROM " . TABLE_BACK_IN_STOCK. " bis LEFT JOIN ".TABLE_PRODUCTS." p on(bis.product_id = p.products_id) LEFT JOIN ".TABLE_PRODUCTS_DESCRIPTION." pd on(p.products_id = pd.products_id) ";
 switch ($bis_show) {
     case "all":
-        $sql_statement = "SELECT * FROM " . TABLE_BACK_IN_STOCK;
+        $sql_statement = $start_sql;
         $header_comment = "showing all active and non active subscriptions";
         break;
     case "product":
-        $sql_statement = "SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE product_id=" . $product_id . " AND sub_active = 1";
+        $sql_statement = $start_sql. " WHERE bis.product_id=" . $product_id . " AND bis.sub_active = 1";
         $header_comment = "showing all active subscriptions to " . zen_get_products_name($product_id);
         break;
     case "subscriber":
-        $sql_statement = "SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE email='" . $subscriber . "' AND sub_active = 1";
+        $sql_statement = $start_sql . " WHERE bis.email='" . $subscriber . "' AND bis.sub_active = 1";
         $header_comment = "showing all active Subscriptions for " . $subscriber;
         break;
     default:
-        $sql_statement = "SELECT * FROM " . TABLE_BACK_IN_STOCK . " WHERE sub_active = 1";
+        $sql_statement = $start_sql . " WHERE bis.sub_active = 1";
         $header_comment = "showing all active subscriptions";
         break;
 }
@@ -189,7 +189,7 @@ $record_count = $subscribers->RecordCount();
                             <td class="dataTableHeadingContent" align="center" valign="top">
                                 <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=email') . '">'.HEADING_EMAIL.'</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">Active</td>
-                            <td class="dataTableHeadingContent" align="center" valign="top">HEADING_PRODUCT_MODEL</td>
+                            <td class="dataTableHeadingContent" align="center" valign="top"><?php echo HEADING_PRODUCT_MODEL;?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
                                 <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=product_id') . '">'.HEADING_PRODUCT.'</a><br/>'; ?></td>
                         </tr>
@@ -218,8 +218,8 @@ $record_count = $subscribers->RecordCount();
                                 <td class="dataTableContent" align="center"><?php echo $subscribers->fields['sub_date']; ?></td>
                                 <td class="dataTableContent" align="center"><?php echo $subscribers->fields['email']; ?></td>
                                 <td class="dataTableContent" align="center"><?php echo ($subscribers->fields['sub_active'] == 1 ? 'Y' : 'N'); ?></td>
-                                <td class="dataTableContent" align="center"><?php echo zen_get_products_model($subscribers->fields['product_id']); ?></td>
-                                <td class="dataTableContent" align="center"><?php echo zen_get_products_name($subscribers->fields['product_id']); ?></td>
+                                <td class="dataTableContent" align="center"><?php echo $subscribers->fields['products_model']; ?></td>
+                                <td class="dataTableContent" align="center"><?php echo $subscribers->fields['products_name']; ?></td>
                             </tr>
                             <?php
                             $subscribers->MoveNext();
