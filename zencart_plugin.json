@@ -1,8 +1,0 @@
-{
-    "plugin_id": "1944",
-    "github_repo": "https://github.com/bislewl/ajax_back_in_stock.git",
-    "name": "Ajax Back In Stock",
-    "author": "bislewl",
-    "description": "This is a re-written version of Conor/Ceon's Back In Stock Module: http://www.zen-cart.com/downloads.php?do=file&id=773 It offers the store owner the ability to offer customers a notification when a product is back in stock. Additionally, this module offers many additional features. 1) Ajax pop-up style box for the customer to be added to the back in stock. 2) The ability to modify most of the box's text via the admin. 3) The ability to notify a customer every time a product is back in stock, or just once 4) Days of Lag: So you aren't spamming customers less than the days of lag when back in stock. 5) Ability to set a maximum emails per batch so you are not flagged and black listed",
-    "support_thread": ""
-}
