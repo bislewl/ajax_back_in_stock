@@ -19,11 +19,12 @@ if ($_SESSION['customer_id']) {
 if(!defined(CSS_JS_LOADER_VERSION)){
     echo '<link rel="stylesheet" type="text/css" href="' . $template->get_template_dir('jquery.fancybox.css',DIR_WS_TEMPLATE, $current_page_base,'css') . '/jquery.fancybox.css" />'."\n";
     echo '<link rel="stylesheet" type="text/css" href="' . $template->get_template_dir('back_in_stock.css',DIR_WS_TEMPLATE, $current_page_base,'css') . '/back_in_stock.css" />'."\n";
-    echo '<script type="text/javascript">if (typeof jQuery == \'undefined\') {  
-  document.write(\'<script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>\');
-}
+    echo '<script type="text/javascript">
+        if (typeof jQuery == \'undefined\') {  
+  document.write("<scr" + "ipt type=\"text/javascript\" src=\"//code.jquery.com/jquery-1.11.3.min.js\"></scr" + "ipt>");
+  }
 </script>'."\n";
-    echo '<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>'."\n";
+    
     echo '<script type="text/javascript" src="' .  $template->get_template_dir('jquery.fancybox.js',DIR_WS_TEMPLATE, $current_page_base,'jscript/jquery') . '/jquery.fancybox.js"></script>'."\n";
     echo '<script type="text/javascript" src="' .  $template->get_template_dir('jquery_back_in_stock.js',DIR_WS_TEMPLATE, $current_page_base,'jscript/jquery') . '/jquery_back_in_stock.js"></script>'."\n";
 }
