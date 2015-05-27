@@ -147,7 +147,7 @@ $record_count = $subscribers->RecordCount();
                                             </form><br/>
                                             <?php
                                             echo HEADING_PRODUCT_ID . ':';
-                                            echo zen_draw_form('back_in_stock', FILENAME_BACK_IN_STOCK, 'filter=subscriber', 'post', '', true);
+                                            echo zen_draw_form('back_in_stock', FILENAME_BACK_IN_STOCK, 'filter=product', 'post', '', true);
                                             echo zen_hide_session_id();
                                             echo zen_draw_input_field('pid')
                                             ?>
