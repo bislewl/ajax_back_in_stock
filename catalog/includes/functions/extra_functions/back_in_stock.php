@@ -52,7 +52,7 @@ function back_in_stock_convert() {
             $ceons_subscribers->MoveNext();
         }
     }
-    $db->Execute("DROP TABLE " . TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS);
+    $db->Execute("RENAME TABLE " . TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS." TO ".TABLE_BACK_IN_STOCK_NOTIFICATION_SUBSCRIPTIONS_OLD);
 }
 
 function back_in_stock_status($email, $product = 0) {
