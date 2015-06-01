@@ -238,13 +238,13 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
                 <th>Product</th>
             </tr>
         <?php
-        $counted = 0;
+        $counted = 1;
         foreach ($bis_emails as $emails) {
             $counted++;
             if (BACK_IN_STOCK_SEND_ADMIN_EMAIL == true) {
                 $counted++;
             }
-            if ($counted >= (int) BACK_IN_STOCK_MAX_EMAILS_PER_BATCH) {
+            if ($counted >= (int) BACK_IN_STOCK_MAX_EMAILS_PER_BATCH && BACK_IN_STOCK_MAX_EMAILS_PER_BATCH != '0') {
                 break;
             }
             ?>
@@ -262,11 +262,9 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
         }
         ?>
     <br/>
-    Processed <?php echo $counted; ?> Notifications
+    Processed <?php echo ( $counted - 1 ); ?> Notifications
     <?php
     if ($counted == (int) BACK_IN_STOCK_MAX_EMAILS_PER_BATCH) {
         echo BACK_IN_STOCK_MAIL_MANY;
     }
-    ?>
-    <?php
 }
