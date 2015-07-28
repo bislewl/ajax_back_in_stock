@@ -12,5 +12,5 @@
  * 
  */
 
-  define('MODULE_PAYMENT_COD_TEXT_TITLE', 'Cash on Delivery');
-  define('MODULE_PAYMENT_COD_TEXT_DESCRIPTION', 'Cash on Delivery');
+  define('MODULE_PAYMENT_AJAX_BACK_IN_STOCK_TEXT_TITLE', 'Ajax Back In Stock');
+  define('MODULE_PAYMENT_AJAX_BACK_IN_STOCK_TEXT_DESCRIPTION', 'This module allows a customer to be notified when a product is back in stock');
