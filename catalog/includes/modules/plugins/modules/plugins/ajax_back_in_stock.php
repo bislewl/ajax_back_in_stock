@@ -177,7 +177,7 @@ class ajaxBackInStock extends base {
         $db->Execute("DELETE FROM " . TABLE_CONFIGURATION . " WHERE configuration_key in ('" . implode("', '", $this->keys()) . "')");
         $admin_pages_array = explode(';', $this->plugin_admin_pages);
         foreach ($admin_pages_array as $admin_page) {
-            $db->Execute("DELETE FROM admin_pages WHERE page_key = '" . $admin_page . "' LIMIT 1;");
+            $db->Execute("DELETE FROM ".TABLE_ADMIN_PAGES." WHERE page_key = '" . $admin_page . "' LIMIT 1;");
         }
         $db->Execute("DROP TABLE ".TABLE_BACK_IN_STOCK);
     }
