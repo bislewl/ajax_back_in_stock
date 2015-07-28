@@ -30,7 +30,7 @@ class ajaxBackInStock extends base {
         $this->description = MODULE_PAYMENT_AJAX_BACK_IN_STOCK_TEXT_DESCRIPTION;
         $this->plugin_version = '4.5.0';
         $this->plugin_id = 1944;
-        $this->plugin_admin_pages = 'configBackInStock;toolsBackInStock';
+        $this->plugin_admin_pages = array('configBackInStock','toolsBackInStock');
         $this->enabled = ((BACK_IN_STOCK_ENABLE == 'True') ? true : false);
     }
 
@@ -175,10 +175,7 @@ class ajaxBackInStock extends base {
     function remove() {
         global $db;
         $db->Execute("DELETE FROM " . TABLE_CONFIGURATION . " WHERE configuration_key in ('" . implode("', '", $this->keys()) . "')");
-        $admin_pages_array = explode(';', $this->plugin_admin_pages);
-        foreach ($admin_pages_array as $admin_page) {
-            $db->Execute("DELETE FROM ".TABLE_ADMIN_PAGES." WHERE page_key = '" . $admin_page . "' LIMIT 1;");
-        }
+        $db->Execute("DELETE FROM " . TABLE_ADMIN_PAGES . " WHERE page_key in ('" . implode("', '", $this->plugin_admin_pages) . "')");
         $db->Execute("DROP TABLE ".TABLE_BACK_IN_STOCK);
     }
 
