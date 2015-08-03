@@ -176,7 +176,12 @@ $record_count = $subscribers->RecordCount();
                                         </td>
                                         <td><?php
                                             echo $conversion_offered;
-                                            ?></td>
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="<?php echo HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG . 'cron/clean_back_instock.php' ?>" target="_blank">Remove Back In Stock Notifications for Deleted Products</a></td>
+                                        <td></td>
                                     </tr>
                                 </table></td>
                         </tr>
@@ -195,7 +200,7 @@ $record_count = $subscribers->RecordCount();
                                 <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=email') . '">' . HEADING_EMAIL . '</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">Active</td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
-                            <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=products_model') . '">' . HEADING_PRODUCT_MODEL . '</a><br/>'; ?></td>
+                                <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=products_model') . '">' . HEADING_PRODUCT_MODEL . '</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top">
                                 <?php echo ' <a href="' . zen_href_link(FILENAME_BACK_IN_STOCK, 'sort=products_name') . '">' . HEADING_PRODUCT . '</a><br/>'; ?></td>
                             <td class="dataTableHeadingContent" align="center" valign="top"><?php echo HEADING_STOCK_LEVEL; ?></td>
@@ -205,10 +210,10 @@ $record_count = $subscribers->RecordCount();
 
                         while (!$subscribers->EOF) {
                             // BOF Check for products that aren't present and delete
-                            if($subscribers->fields['products_name'] == ''){
-                                $product_present = $db->Execute("SELECT * FROM ".TABLE_PRODUCTS." WHERE products_id='".$subscribers->fields['products_name']."'");
-                                if($product_present->RecordCount() == 0){
-                                    $db->Execute("DELETE FROM ".TABLE_BACK_IN_STOCK." WHERE bis_id='".$subscribers->fields['bis_id']."'");
+                            if ($subscribers->fields['products_name'] == '') {
+                                $product_present = $db->Execute("SELECT * FROM " . TABLE_PRODUCTS . " WHERE products_id='" . $subscribers->fields['products_name'] . "'");
+                                if ($product_present->RecordCount() == 0) {
+                                    $db->Execute("DELETE FROM " . TABLE_BACK_IN_STOCK . " WHERE bis_id='" . $subscribers->fields['bis_id'] . "'");
                                     $subscribers->MoveNext();
                                     continue;
                                 }

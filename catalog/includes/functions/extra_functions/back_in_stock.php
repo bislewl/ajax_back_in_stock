@@ -268,3 +268,16 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
         echo BACK_IN_STOCK_MAIL_MANY;
     }
 }
+
+function cleanse_back_in_stock_subscriptions(){
+    global $db;
+            $products_query = $db->Execute("SELECT DISTINCT product_id FROM " . TABLE_BACK_IN_STOCK );
+            while(!$products_query->EOF){
+                $query_product = $db->Execute("SELECT * FROM ".TABLE_PRODUCTS." WHERE products_id='".(int)$products_query->fields['product_id']."'");
+                if($query_product->RecordCount() < 1){
+                    $db->Execute("DELETE FROM ".TABLE_BACK_IN_STOCK." WHERE product_id='".(int)$products_query->fields['product_id']."'");
+                }
+                $products_query->MoveNext();
+            }
+}
+
