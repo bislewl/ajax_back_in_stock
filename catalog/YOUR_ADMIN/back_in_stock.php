@@ -294,7 +294,7 @@ $record_count = $subscribers->RecordCount();
             </tr>
         </table>
         <!-- body_eof //-->
-        <?php echo TEXT_HINT_ADD_TO_CPANEL . ": '" . HTTPS_CATALOG_SERVER . DIR_WS_HTTPS_CATALOG . "cron/send_back_in_stock_notifications.php?key=" . BACK_IN_STOCK_CRON_KEY . "' "; ?>
+        <?php echo TEXT_HINT_ADD_TO_CPANEL . ": '" . HTTP_SERVER . DIR_WS_CATALOG . "cron/send_back_in_stock_notifications.php?key=" . BACK_IN_STOCK_CRON_KEY . "' "; ?>
         <!-- footer //-->
         <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
         <!-- footer_eof //-->
