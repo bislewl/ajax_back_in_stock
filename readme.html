@@ -56,14 +56,16 @@
                         <li>Log in to your Admin or load any page in your Admin, the module will self-install</li>
                         <li>Make these file changes:<ul>
                                 <li>Add this in your includes/templates/YOUR_TEMPLATE/common/tpl_footer.php (really this can go anywhere)<br/>
-<TEXTAREA>
+                                    <TEXTAREA>
 <!--bof back in stock popup-->
 <?php require($template->get_template_dir('tpl_modules_back_in_stock_fancybox.php',DIR_WS_TEMPLATE, $current_page_base,'templates'). '/tpl_modules_back_in_stock_fancybox.php'); ?>
 <!--eof back in stock popup--></TEXTAREA>
                     </li>
-                    <li>in your includes/functions/functions_general.php find:<br/>
+                    
+<li>in your includes/functions/functions_general.php find:<br/>
                         <TEXTAREA>
-$return_button = zen_image_button(BUTTON_IMAGE_SOLD_OUT_SMALL, BUTTON_SOLD_OUT_SMALL_ALT);
+                    
+$return_button = zen_image_button(BUTTON_IMAGE_SOLD_OUT, BUTTON_SOLD_OUT_ALT);
 </TEXTAREA>
 <br/>
 Replace with:<br/>
@@ -77,10 +79,9 @@ if(BACK_IN_STOCK_ENABLE == "true"){
                 }
 </TEXTAREA>
 </li>
-<li>in your includes/functions/functions_general.php find:<br/>
+                    <li>in your includes/functions/functions_general.php find:<br/>
                         <TEXTAREA>
-                    
-$return_button = zen_image_button(BUTTON_IMAGE_SOLD_OUT, BUTTON_SOLD_OUT_ALT);
+$return_button = zen_image_button(BUTTON_IMAGE_SOLD_OUT_SMALL, BUTTON_SOLD_OUT_SMALL_ALT);
 </TEXTAREA>
 <br/>
 Replace with:<br/>
@@ -106,7 +107,7 @@ if(BACK_IN_STOCK_ENABLE == "true"){
             </div>
             <div id="tabs-tips">
                 <ul>
-                <li>Set up your notifications to be automatic in your cron/scheduled task</li>
+                <li>Set up your notifications to be automatic in your cron/scheduled task. You can find this link in the Admin -> Tools -> Back In Stock bottom of the page</li>
                 </ul>
             </div>
             <div id="tabs-uninstall">
