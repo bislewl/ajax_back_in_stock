@@ -110,7 +110,7 @@ function back_in_stock_subscription($array, $change_type = "add") {
                         . $html_message['BOTTOM_MESSAGE'] . "\n" . "\n"
                         . BACK_IN_STOCK_MAIL_CANCEL . "\n" . $html_message['SPAM_LINK'] . "\n";
                 zen_mail($customers_name, $customers_email, $html_message['PRODUCT_NAME'] . BACK_IN_STOCK_MAIL_STATUS . STORE_NAME, $email_text, STORE_NAME, EMAIL_FROM, $html_message, 'back_in_stock_notification');
-                if (BACK_IN_STOCK_SEND_ADMIN_EMAIL == 'true') {
+                if (BACK_IN_STOCK_SEND_ADMIN_EMAIL == 'true'  && BACK_IN_STOCK_ADMIN_EMAIL != '') {
                     zen_mail('', BACK_IN_STOCK_ADMIN_EMAIL, $html_message['PRODUCT_NAME'] . BACK_IN_STOCK_MAIL_STATUS . STORE_NAME, $email_text, STORE_NAME, EMAIL_FROM, $html_message, 'back_in_stock_notification');
                 }
             }
