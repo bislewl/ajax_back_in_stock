@@ -262,7 +262,7 @@ function back_in_stock_send($product_id = 0, $bis_id = 0, $preview = true) {
 <br/>
                 You can Process <?php echo $counted; ?> Notifications by clicking:
                 <?php
-                echo '<a href="'.zen_href_link("cron/send_back_in_stock_notifications.php", zen_get_all_get_params(array('preview')),'NONSSL',true,true,true).'">'.'HERE'.'</a>';
+                echo '<a href="'.zen_href_link("cron/send_back_in_stock_notifications.php", zen_get_all_get_params(array('preview')),'SSL',true,true,true).'">'.'HERE'.'</a>';
                 echo "\n".'<br/>';
                 if ($counted == (int) BACK_IN_STOCK_MAX_EMAILS_PER_BATCH) {
                     echo BACK_IN_STOCK_MAIL_MANY;
