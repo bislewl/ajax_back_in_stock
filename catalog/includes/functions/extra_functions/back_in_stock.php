@@ -92,7 +92,7 @@ function back_in_stock_subscription($array, $change_type = "add") {
                 $html_message['CUSTOMERS_NAME'] = $customers_name;
                 $html_message['PRODUCT_NAME'] = str_replace("<br/>", " ", zen_get_products_name($product_id));
                 //$html_message['PRODUCT_NAME'] = strip_tags(zen_get_products_name($product_id));
-                $html_message['SPAM_LINK'] = HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . 'index.php?main_page=back_in_stock&bis_id=' . $bis_id;
+                $html_message['SPAM_LINK'] = zen_href_link(FILENAME_BACK_IN_STOCK,'bis_id='.$bis_id,'SSL');
                 $html_message['TOP_MESSAGE'] = BACK_IN_STOCK_MAIL_TOP . $html_message['PRODUCT_NAME'] . "\n" . "\n" . BACK_IN_STOCK_MAIL_MAIN;
                 if (BACK_IN_STOCK_DESC_IN_EMAIL == 1) {
                     $html_message['PRODUCT_DESCRIPTION'] = zen_get_products_description($product_id);
