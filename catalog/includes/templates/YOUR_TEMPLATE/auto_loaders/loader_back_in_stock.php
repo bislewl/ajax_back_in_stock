@@ -9,7 +9,7 @@
 if (BACK_IN_STOCK_ENABLE == "true") {
     $loaders[] = array('conditions' => array('pages' => array('*')),
         'jscript_files' => array(
-            '//code.jquery.com/jquery-1.12.0.min.js' => 1,
+            '//code.jquery.com/jquery-1.12.0.min.js" integrity="sha384-XxcvoeNF5V0ZfksTnV+bejnCsJjOOIzN6UVwF85WBsAnU3zeYh5bloN+L4WLgeNE" crossorigin="anonymous"' => 1,
             'jquery/jquery.fancybox.js' => 2,
             'jquery/jquery_back_in_stock.js' => 3
         ),
